@@ -2,7 +2,7 @@
 
 ![Framework](https://img.shields.io/badge/Protein-Evolution-blue?style=for-the-badge&logo=github)
 
-This package provides an official implementation of **unZipro**.
+This package provides an official implementation of **unZipro** using PyTorch.
 
 ## Overview
 

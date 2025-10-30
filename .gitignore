@@ -20,10 +20,6 @@ venv/
 *.pt
 *.pth
 
-# Dataset / large files
-data/
-*.csv
-
 # IDE files
 .vscode/
 .idea/
