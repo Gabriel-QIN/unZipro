@@ -1,0 +1,29 @@
+# Python compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+.env/
+*.env
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# PyTorch checkpoints
+*.pt
+*.pth
+
+# Dataset / large files
+data/
+*.csv
+
+# IDE files
+.vscode/
+.idea/
