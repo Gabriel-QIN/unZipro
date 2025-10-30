@@ -20,6 +20,5 @@ venv/
 *.pt
 *.pth
 
-# IDE files
-.vscode/
-.idea/
+# data
+data/finetuned/homologs/homolog_info.csv
