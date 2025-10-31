@@ -2,18 +2,20 @@
 
 ![Framework](https://img.shields.io/badge/Protein-Evolution-blue?style=for-the-badge&logo=github)
 
-This package provides an official implementation of **unZipro** using PyTorch.
+Official PyTorch implementation of **unZipro** — an unsupervised zero-shot inverse folding framework for protein evolution and high-fitness variant prediction.
 
 ## Overview
 
 unZipro (<u>un</u>supervised Zero-shot <u>i</u>nverse folding framework for <u>pro</u>tein evolution) is a lightweight graph neural network (GNN)-based framework designed for AI-guided protein engineering.
 
-unZipro integrates zero-shot transfer learning with inverse folding models to capture both:
+unZipro is comprised of a two-step learning:
 
-- Universal sequence–structure constraints learned from diverse protein structures;
-- Family-specific adaptation via meta-learning on subset of structural tasks.
+🧠 Zero-shot transfer learning to capture universal sequence–structure constraints
+🧩 Meta-learning for family-specific adaptation from structural subsets
 
-This nuanced design allows efficient fitness landscape modelling and accurate nomination of high-fitness variants — even without experimental data for finetuning.
+Together, these capabilities enable accurate modeling of fitness landscapes and prioritization of high-fitness variants, even without supervised finetuning.
+unZipro achieved up to 28× improvement in desired properties
+and up to 100% success rate for high-fitness mutation prediction (>1.1× WT).
 
 ### 🚀 Key Features of unZipro
 
@@ -25,7 +27,7 @@ This nuanced design allows efficient fitness landscape modelling and accurate no
 
 ### 📊 Experimental benchmark Results
 
-​	We have validated unZipro on 10 diverse protein engineering tasks, including:
+​We have validated unZipro on 10 diverse protein engineering tasks, including:
 
 1. Deaminase (TadA8e) for improved base editing efficiency
 2. Nucleases (SpCas9, SpuFanzor, CasΦ2, T5E) for improved gene-editing activity
@@ -47,7 +49,13 @@ We have achieved up to 28-fold improvement in desired protein properties and suc
 ## Getting started
 
 ### Installation
-
+```sh
+git clone https://github.com/Gabriel-Qin/unZipro.git
+cd unZipro
+conda create -n unzipro python=3.9
+conda activate unzipro
+pip install -r requirements.txt
+```
 ### Pretrain on PDB50 datasets
 You can reproce the unZipro pre-training and evaluation following the instructions from [Pre-training](docs/pretrain.md).
 
@@ -69,16 +77,36 @@ python script/unZipro_pretrain.py \
 
 #### 2. 
 
-
-### High-fitness mutation recommendation
-
-#### 1.Inference using pretrained models
+You can also evaluate all benchmarks automatically via
+runs/evaluate_pretrained_model.sh
 
 
-#### 2. Inference using finetuned models
+### 🌟 High-fitness mutation recommendation
+This is the core function of unZipro — predicting high-fitness mutations
+based on structure-conditioned inverse folding model and family-specific finetuning.
 
-## Acknowledgements
+<blockquote style="border-left: 4px solid #4CAF50; padding: 10px 15px; background: #f9f9f9;">
+<h3>💡 High-fitness Mutation Recommendation</h3>
+<p><b>unZipro</b> identifies and prioritizes high-fitness variants using structure-informed inverse folding model.</p>
+<ul>
+<li>Predicts beneficial amino acid substitutions directly from structure</li>
+<li>Ranks variants based on learned fitness landscape</li>
+<li>Works in zero-shot mode — no supervised fine-tuning required</li>
+</ul>
+</blockquote>
 
+
+#### 1️⃣ Inference using pretrained models
+
+
+
+#### 2️⃣ Inference using finetuned models
+
+💡 Outputs include mutation probabilities, ranked residue-wise substitution lists,
+and sequence fitness heatmaps — enabling rational protein design.
+
+## 🙏 Acknowledgements
+We thank the contributors of PyTorch, learn2learn, and Foldseek for providing foundational tools for this work.
 
 ## 📖 Citation
 
