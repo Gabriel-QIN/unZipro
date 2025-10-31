@@ -34,20 +34,50 @@ This nuanced design allows efficient fitness landscape modelling and accurate no
 5. Plant transcription factors with enhanced transcriptional activity
 6. Wheat virus-resistance proteins with reduced virulence
 
-We have achieved up to 28-fold improvement in desired protein properties and success rate of high-fitness (HF) variants up to XX% (an average of XX%).
+We have achieved up to 28-fold improvement in desired protein properties and success rate of high-fitness variants (>1.1-fold compared with WT) up to 100% (an average of 61%).
 
 ### 🌱 Applications
 
-- Enzyme engineering
-- Genome editing tools (e.g., SpCas9, BE, and PE)
-- Plant protein design (virus resistance, transcription factor tuning)
+- Enzyme engineering 
+- Optimization of genome editing tools (e.g., SpCas9, BE, and PE)
+- Plant protein engineering (virus resistance, transcription factor tuning, etc.)
 - Protein therapeutics
 - General protein design tasks in biotechnology & agriculture
 
-
-
 ## Getting started
 
+### Installation
+
+### Pretrain on PDB50 datasets
+You can reproce the unZipro pre-training and evaluation following the instructions from [Pre-training](docs/pretrain.md).
+
+Or pre-train on your own structure dataset
+```python
+python script/unZipro_pretrain.py \
+    --train_list data/pretrained/train.txt \
+    --valid_list data/pretrained/valid.txt \
+    --pdbdir data/pretrained/PDB \
+    --epochs 100 \
+    --batchsize 10 \
+    --model Models \
+    --cachedir data/pretrained/tmp/ \
+    --project_name unZipro_pretrain
+```
+
+### Finetuning on homolog datasets
+#### 1. Run Foldseek search on PDB50 and AFDB50 datasets
+
+#### 2. 
+
+
+### High-fitness mutation recommendation
+
+#### 1.Inference using pretrained models
+
+
+#### 2. Inference using finetuned models
+
+## Acknowledgements
 
 
 ## 📖 Citation
