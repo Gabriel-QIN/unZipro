@@ -82,10 +82,9 @@ runs/evaluate_pretrained_model.sh
 
 
 ### 🌟 High-fitness mutation recommendation
-
+>This is the core function of **unZipro** — predicting high-fitness mutations
+based on structure-conditioned inverse folding model and family-specific finetuning
 <blockquote style="border-left: 4px solid #4CAF50; padding: 10px 15px; background: #f9f9f9;">
-<p>This is the core function of <b>unZipro</b> — predicting high-fitness mutations
-based on structure-conditioned inverse folding model and family-specific finetuning</p>
 <ul>
 <li>Predicts beneficial amino acid substitutions directly from structure</li>
 <li>Ranks variants based on learned fitness landscape</li>
@@ -101,10 +100,17 @@ based on structure-conditioned inverse folding model and family-specific finetun
 #### 2️⃣ Inference using finetuned models
 
 💡 Outputs include mutation probabilities, ranked residue-wise substitution lists,
-and sequence fitness heatmaps — enabling rational protein design.
+and sequence fitness heatmaps.
 
 ## 🙏 Acknowledgements
 We thank the contributors of PyTorch, learn2learn, and Foldseek for providing foundational tools for this work.
+
+unZipro draws inspiration and leverages/modifies implementations from the following repositories:
+jingraham/neurips19-graph-protein-design for the preprocessed CATH dataset and data pipeline implementation.
+facebook/esm for their ESM implementations, pretrained model weights, and data pipeline components like Alphabet.
+dauparas/ProteinMPNN for the ProteinMPNN implementation and multi-chain dataset.
+A4Bio/PiFold for their PiFold implementation.
+We express our sincere appreciation to the authors of these repositories for their invaluable contributions to the development of ByProt.
 
 ## 📖 Citation
 
