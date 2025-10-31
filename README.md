@@ -82,8 +82,6 @@ runs/evaluate_pretrained_model.sh
 
 
 ### 🌟 High-fitness mutation recommendation
-This is the core function of <b>unZipro</b> — predicting high-fitness mutations
-based on structure-conditioned inverse folding model and family-specific finetuning.
 
 <blockquote style="border-left: 4px solid #4CAF50; padding: 10px 15px; background: #f9f9f9;">
 <p>This is the core function of <b>unZipro</b> — predicting high-fitness mutations
