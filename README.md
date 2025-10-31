@@ -12,22 +12,21 @@ Official PyTorch implementation of **unZipro** — an unsupervised zero-shot inv
 
 unZipro (<u>un</u>supervised Zero-shot <u>i</u>nverse folding framework for <u>pro</u>tein evolution) is a lightweight graph neural network (GNN)-based framework designed for AI-guided protein engineering.
 
+By combining generalizable constraints with family-specific adaptation, unZipro efficiently identifies functional mutations without exhaustive screening, drastically saving time and resources.
+
+### How it works
 unZipro is comprised of a two-step learning:
 
-🧠 Zero-shot transfer learning to capture universal sequence–structure constraints
-🧩 Meta-learning for family-specific adaptation from structural subsets
-We have achieved up to 28-fold improvement in desired protein properties and success rate of high-fitness variants (>1.1-fold compared with WT) up to 100% (an average of 61%).
-Together, these capabilities enable accurate modeling of fitness landscapes and prioritization of high-fitness variants, even without supervised finetuning.
-unZipro achieved up to 28× improvement in desired properties
-and up to 100% success rate for high-fitness mutation prediction (>1.1× WT).
+- 🧠 Zero-shot transfer learning captures a universal protein fitness landscape.
+- 🧩 Meta-learning adapts to family-specific fitness landscapes for more precise high-fitness variant prioritization.
 
 ### 🚀 Key Features of unZipro
 
-1. Zero-shot transfer: No need for extensive few-shot training or large experimental datasets
-2. Efficient: Substantially reduces experimental screening by prioritizing top candidates (as few as ~10 variants)
-3. Accurate: Predicts evolutionarily plausible amino acid substitutions tailored to target protein families
-4. Broad applicability: Experimentally demonstrated successfully across enzymes, polymerases, transcription factors, virus-resistance proteins, and more
-5. Structure-flexible: Supports both crystal structures and AlphaFold-predicted models
+1. Zero-shot transfer – predict functional variants without extensive few-shot training or large experimental datasets.
+2. Highly efficient – drastically reduces experimental screening (as few as ~10 variants) and computational costs.
+3. High accuracy – achieves an average of 61% success for high-fitness mutations (>1.1× WT), with up to 100% success and 28× improvement in desired properties.
+4. Broad applicability – experimentally validated across enzyme, nucleases, polymerases, transcription factors, virus-resistance proteins, with potential for more protein engineering applications.
+5. Structure-flexible: supports both experimentally-resoveled structures and AlphaFold-predicted models.
 
 ### 🌱 Applications
 
