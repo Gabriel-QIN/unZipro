@@ -1,6 +1,10 @@
 # unZipro
 
-![Framework](https://img.shields.io/badge/Protein-Evolution-blue?style=for-the-badge&logo=github)
+<a href=""><img src="https://img.shields.io/badge/Paper-bioRxiv-green" style="max-width: 100%;"></a>
+<a href="https://huggingface.co/unZipro"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-red?label=unZipro" style="max-width: 100%;"></a>
+<a href="https://colab.research.google.com/github/Gabriel-Qin/unZipro/blob/main/notebooks/unZipro.ipynb">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
 
 Official PyTorch implementation of **unZipro** — an unsupervised zero-shot inverse folding framework for protein evolution and high-fitness variant prediction.
 
@@ -36,11 +40,10 @@ and up to 100% success rate for high-fitness mutation prediction (>1.1× WT).
 ## Google Colab
 <a href="https://colab.research.google.com/github/Gabriel-Qin/unZipro/blob/main/notebooks/unZipro.ipynb">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-</a> <br />
+</a>
 We prepared a convenient google colab notebook to perform the unZipro code functionalities. However, as the pipeline requires significant amount of GPU memory to run for larger protein structures, we highly recommend to run it using a local installation and at least 32 Gb of GPU memory.
 
-## Getting started
-
+## Deploy unZipro on local server
 ### Installation
 ```sh
 git clone https://github.com/Gabriel-Qin/unZipro.git
@@ -49,7 +52,7 @@ conda create -n unZipro python=3.9
 conda activate unZipro
 pip install -r requirements.txt
 ```
-### Pretrain on PDB50 datasets
+### Pretraining
 You can reproce the unZipro pre-training and evaluation following the instructions from [Pre-training](docs/pretrain.md).
 
 Or pre-train on your own structure dataset
@@ -65,25 +68,25 @@ python script/unZipro_pretrain.py \
     --project_name unZipro_pretrain
 ```
 
-### Finetuning on homolog datasets
-#### 1. Run Foldseek search on PDB100 and AFDB50 datasets
-```sh
-# install
-conda install -c conda-forge -c bioconda foldseek
-# create local db
-foldseek createdb data/AFDB50 AFDB50 tmp_createdb
-foldseek createdb data/pdb100 pdb100 tmp_createdb
-# run Foldseek search
-mkdir -p tmp_search
-foldseek easy-search query_folder/ AFDB50 out.m8 tmp_search --threads 32 -s 9.5
-foldseek easy-search query_folder/ pdb100 out.m8 tmp_search --threads 32 -s 9.5
-```
-or through web API
-#### 2. 
-
-You can also evaluate all benchmarks automatically via
+### Finetuning
+#### 1. Run Foldseek Search on PDB100 and AFDB50 Datasets
+You can perform structure-based searches using Foldseek on your local machine.
+For users who want to set up Foldseek on their local server, please refer to [here](docs/foldseek.md)..
+If you prefer not to run locally, you can use the official Foldseek Web Server:
+👉 https://search.foldseek.com/search
 runs/evaluate_pretrained_model.sh
 
+#### 2. Download data
+```sh
+python script/fetch_PDB_parallel.py -i data/finetuned/PDB_IDs.txt -o data/finetuned/PDB -m RCSB ps -cpu 8
+python script/fetch_PDB_parallel.py -i data/finetuned/AFDB_IDs.txt -o data/finetuned/PDB -m AF ps -cpu 8
+```
+
+#### 3. Finetuning
+
+#### 3. Finetuning
+
+#### Run inference
 
 ### High-fitness mutation recommendation
 >This is the core module of **unZipro** — predicting high-fitness mutations
@@ -115,7 +118,7 @@ We have achieved up to 28-fold improvement in desired protein properties and suc
 and sequence fitness heatmaps.
 
 ## 🙏 Acknowledgements
-We thank the contributors of PyTorch, learn2learn, and Foldseek for providing foundational tools for this work.
+We thank the contributors of PyTorch, learn2learn, AFDB, and Foldseek for providing foundational tools for this work.
 
 unZipro draws inspiration and leverages/modifies implementations from the following repositories:
 jingraham/neurips19-graph-protein-design for the preprocessed CATH dataset and data pipeline implementation.
