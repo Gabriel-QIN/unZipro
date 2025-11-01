@@ -6,7 +6,7 @@ There are three main steps for unZipro finetuning:
 3. Finetuning pre-trained inverse folding model
 
 ## Getting started
-> Note: if you already have Foldseek environment and database, skip this step!
+> Note: if you already have Foldseek environment and PDB100/AFDB50 database, skip this step!
 ### Install Foldseek
 ```sh
 # install
