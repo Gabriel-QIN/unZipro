@@ -8,20 +8,20 @@
 
 Official PyTorch implementation of **unZipro** — an unsupervised zero-shot inverse folding framework for protein evolution and high-fitness variant prediction.
 
-## Overview
+# Overview
 
 unZipro (<u>un</u>supervised Zero-shot <u>i</u>nverse folding framework for <u>pro</u>tein evolution) is a lightweight graph neural network (GNN)-based framework designed for AI-guided protein engineering.
 
 By combining generalizable constraints with family-specific adaptation, unZipro efficiently identifies functional mutations without exhaustive screening, drastically saving time and resources.
 
-### ⚙️ How it works
+## ⚙️ How it works
 unZipro tackles protein engineering like “hunting for the needle in the haystack”:
 
 - 🧠 Zero-shot transfer learning captures a universal protein fitness landscape.
 - 🧩 Meta-learning adapts to family-specific fitness landscapes.
 - Prioritization of the most promising high-fitness variants for experimental validation.
 
-### 🚀 Key Features of unZipro
+## 🚀 Key Features of unZipro
 
 1. Zero-shot transfer – predict functional variants without extensive few-shot training or large experimental datasets.
 2. Highly efficient – drastically reduces experimental screening (as few as ~10 variants) and computational costs.
@@ -29,7 +29,7 @@ unZipro tackles protein engineering like “hunting for the needle in the haysta
 4. Broad applicability – experimentally validated across enzyme, nucleases, polymerases, transcription factors, virus-resistance proteins, with potential for more protein engineering applications.
 5. Structure-flexible: supports both experimentally-resoveled structures and AlphaFold-predicted models.
 
-### 🌱 Applications
+## 🌱 Applications
 
 - Enzyme engineering 
 - Optimization of genome editing tools (e.g., SpCas9, Cas12, base editor, and prime editor)
@@ -37,19 +37,35 @@ unZipro tackles protein engineering like “hunting for the needle in the haysta
 - Protein therapeutics
 - General protein design tasks in biotechnology & agriculture
 
-## Google Colab  <a href="https://colab.research.google.com/github/Gabriel-Qin/unZipro/blob/main/notebooks/unZipro.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+# Google Colab  <a href="https://colab.research.google.com/github/Gabriel-Qin/unZipro/blob/main/notebooks/unZipro.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 We prepared a convenient google colab notebook to perform the unZipro code functionalities. However, as the pipeline requires significant amount of GPU memory to run for larger protein structures, we highly recommend to run it using a local installation and at least 32 Gb of GPU memory.
 
-## Deploy unZipro on local server
-### Installation
+# Run unZipro on local machine
+## Installation
 ```sh
 git clone https://github.com/Gabriel-Qin/unZipro.git
 cd unZipro
+
 conda create -n unZipro python=3.9
 conda activate unZipro
-pip install -r requirements.txt
+
+pip install numpy pandas biotite learn2learn requests
+
+# Install PyTorch (CUDA 12.4)
+pip install torch==2.4.1+cu124 torchvision==0.19.1+cu124 --index-url https://download.pytorch.org/whl/cu124
+# Note: PyTorch ≥ 2.0 is also supported. Please select the appropriate CUDA version for your GPU.
+# FYI, please refer to: https://pytorch.org/get-started/locally/
 ```
-### Pretraining
+Alternatively, you can simply run:
+```sh
+bash run install_unZipro.sh
+```
+After installation, verify the environment with:
+```sh
+python -c "import torch; print(torch.__version__, torch.cuda.is_available())" # Expected output: `2.4.1+cu124 True`
+```
+This confirms that PyTorch is correctly installed and GPU acceleration is available.
+## Pretraining
 You can reproce the unZipro pre-training and evaluation following the instructions from [Pre-training](docs/pretrain.md).
 
 Or pre-train on your own structure dataset
@@ -65,7 +81,7 @@ python script/unZipro_pretrain.py \
     --project_name unZipro_pretrain
 ```
 
-### Finetuning
+## Finetuning
 Run unZipro fine-tuning easily with the following command.  
 ```
 # Before runnning, you must prepare your train/valid dataset (each file with corresponding PDB IDs)
@@ -75,34 +91,53 @@ python script/unZipro_finetuning.py --train data/finetuned_dataset/${name}/train
 ```
 For more details, see [Finetuning](docs/finetuning.md).
 
-### High-fitness mutation recommendation
->This is the core module of **unZipro** — predicting high-fitness mutations
->1. Predicts high-fitness amino acid substitutions directly from structure
->2. Ranks variants based on learned family-specific fitness landscape
->3. Works in zero-shot manner — no supervised fine-tuning required
+## High-fitness mutation prioritization
+> unZipro predicts and prioritizes beneficial mutations directly from protein structures, enabling structure-aware protein engineering without supervised fine-tuning.
 
-#### 1️⃣ Inference using pretrained models
+### Inference Example:
+```sh
+python script/unZipro_mutation.py \
+    --pdb 6vpcE \
+    --param Models/finetuned/unZipro_ABE.pt \
+    --outdir outputs/mutation/genome_editing/ABE \
+    --name TadA8e \
+    --rank_by_prob --logits --probs
+```
+The outputs include:
 
+- Per-residue mutation probabilities/logits
 
+- Ranked potential high-fitness mutations
 
-#### 2️⃣ Inference using finetuned models
+- Sequence fitness heatmaps
 
-##### 📊 Experimental valudation results
+Following are some provided `examples`:
 
-​We have validated unZipro on 10 diverse protein engineering tasks, including:
+| Category               | Script                   | Description                                             |
+| ---------------------- | ------------------------ | ------------------------------------------------------- |
+| **Genome editors**     | `runs/run_ABE.sh`        | Adenine base editor (TadA8e)                            |
+|                        | `runs/run_nuclease.sh`   | Three nucleases (SpCas9, CasΦ2/Cas12j2, T5E)            |
+|                        | `runs/run_polymerase.sh` | MMLV reverse transcriptase under multiple conformations |
+| **Fluorescent enzyme** | `runs/run_luciferase.sh` | Luciferase for improved fluorescence intensity          |
+| **Plant proteins**     | `runs/run_plantTF.sh`    | DNA-binding domains of plant transcription factors      |
+|                        | `runs/run_R_protein.sh`  | Plant virus-resistance (R) proteins      
 
-1. Deaminase (TadA8e) for improved base editing efficiency
-2. Nucleases (SpCas9, CasΦ2, T5E) for improved gene-editing activity
-3. Reverse transcriptase (MMLV-RT) for improved prime editing efficiency
-4. Luciferase with improved fluorescence intensity
-5. Plant transcription factors with enhanced transcriptional activity
-6. Plant virus-resistance proteins with reduced virulence
+### Experimental validation
 
-We have achieved up to 28-fold improvement in desired protein properties and success rate of high-fitness variants (>1.1-fold compared with WT) up to 100% (an average of 61%).
+unZipro was validated across 9 diverse protein engineering tasks, achieving consistent improvements in functional assays:
 
+| Task | Target                              | Objective                         |
+| ---- | ----------------------------------- | --------------------------------- |
+| 1    | **Deaminase (TadA8e)**              | Improved base-editing efficiency  |
+| 2    | **Nucleases (SpCas9, CasΦ2, T5E)**  | Enhanced genome-editing activity  |
+| 3    | **Reverse transcriptase (MMLV-RT)** | Boosted prime-editing efficiency  |
+| 4    | **Luciferase**                      | Increased fluorescence intensity  |
+| 5    | **Plant transcription factors**     | Enhanced transcriptional activity |
+| 6    | **Plant R-proteins**                | Reduced pathogen virulence        |
 
-💡 Outputs include mutation probabilities, ranked residue-wise substitution lists,
-and sequence fitness heatmaps.
+> unZipro achieves up to 28× improvement in desired protein properties,
+and the success rate of high-fitness variants (>1.1× WT) reaches up to 100% (average 61%).
+
 
 ## 🙏 Acknowledgements
 We thank the contributors of PyTorch, learn2learn, AFDB, and Foldseek for providing foundational tools for this work.
