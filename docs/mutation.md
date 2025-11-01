@@ -2,18 +2,18 @@
 Command-line Flags for `unZipro_mutation.py`:
 | Flag                    | Type / Example                                       | Description                                                  |
 | ----------------------- | ---------------------------------------------------- | ------------------------------------------------------------ |
-| `--pdb`, `-i`           | `File` or `comma-separated list` (e.g., `8wutE,8wuvE`) | Input PDB file(s) or IDs. Supports both a text file containing PDB names and comma-separated entries. |
-| `--pdbdir`, `-dir`      | `Path`                                               | Directory containing the PDB structure files.                |
-| `--gpu`, `-gpu`         | `Int` (default: `0`)                                 | Specifies the GPU device ID; falls back to CPU if unavailable.                                        |
-| `--param`, `-m`         | `Path`                                               | Path to the pretrained or finetuned model parameter file (`.pt`). |
-| `--outdir`, `-o`        | `Path`                                               | Output directory for saving results.                         |
-| `--name`, `-n`          | `Str`                                                | Custom name prefix. |
-| `--nneighbor`, `-nb`    | `Int` (default: `20`)                                | Number of neighboring nodes considered in graph construction. |
-| `--cachedir`, `-cd`     | `Path`                                               | Directory to store cached protein structure features.        |
-| `--probs`, `-p`         | `flag`                                               | Output per-residue sequence probabilities.                   |
-| `--logits`, `-l`        | `flag`                                               | Output raw model logits instead of probabilities.            |
-| `--rank_by_prob`, `-rp` | `flag`                                              | Rank mutations by predicted mutation probability.            |
-| `--res`, `-res`         | `Comma-separated list` (e.g., `83,123`)              | Restrict output to specific residue positions.               |
+| `--pdb`, `-i`           | `file` or `comma-separated list` (e.g., `8wutE,8wuvE`) | Input PDB file(s) or IDs. Supports both a text file containing PDB names and comma-separated entries. |
+| `--pdbdir`, `-dir`      | `path`                                               | Directory containing the PDB structure files.                |
+| `--gpu`, `-gpu`         | `int` (default: `0`)                                 | Specifies the GPU device ID; falls back to CPU if unavailable.                                        |
+| `--param`, `-m`         | `path`                                               | Path to the pretrained or finetuned model parameter file (`.pt`). |
+| `--outdir`, `-o`        | `path`                                               | Output directory for saving results.                         |
+| `--name`, `-n`          | `str`                                                | Custom name prefix. |
+| `--nneighbor`, `-nb`    | `int` (default: `20`)                                | Number of neighboring nodes considered in graph construction. |
+| `--cachedir`, `-cd`     | `path`                                               | Directory to store cached protein structure features.        |
+| `--probs`, `-p`         | `store_true`                                               | Output per-residue sequence probabilities.                   |
+| `--logits`, `-l`        | `store_true`                                               | Output raw model logits instead of probabilities.            |
+| `--rank_by_prob`, `-rp` | `store_true`                                              | Rank mutations by predicted mutation probability.            |
+| `--res`, `-res`         | `comma-separated list` (e.g., `83,123`)              | Restrict output to specific residue positions.               |
 
 
 ### Genome editing proteins
