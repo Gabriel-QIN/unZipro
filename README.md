@@ -47,17 +47,30 @@ git clone https://github.com/Gabriel-Qin/unZipro.git
 cd unZipro
 
 # Install dependencies and PyTorch automatically
-pip install -r runs/install_unZipro.sh
+bash runs/install_unZipro.sh
 ```
-Alternatively, you can simply run:
+Alternatively, you can manually install all dependencies with:
 ```sh
-bash run install_unZipro.sh
+pip install -r requirements.txt
 ```
 After installation, verify the environment with:
 ```sh
 python -c "import torch; print(torch.__version__, torch.cuda.is_available())" # Expected output: `2.4.1+cu124 True`
 ```
 This confirms that PyTorch is correctly installed and GPU acceleration is available.
+### Install Foldseek
+Foldseek is required for unZipro finetuning.
+ You can easily install it via **conda**:
+
+```sh
+conda install -c bioconda foldseek
+```
+
+> After installation, verify that Foldseek is available:
+
+```sh
+foldseek version
+```
 ## Pretraining
 You can reproce the unZipro pre-training and evaluation following the instructions from [Pre-training](docs/pretrain.md).
 
