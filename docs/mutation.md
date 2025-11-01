@@ -10,9 +10,9 @@ Command-line Flags for `unZipro_mutation.py`:
 | `--name`, `-n`          | `Str`                                                | Custom name prefix. |
 | `--nneighbor`, `-nb`    | `Int` (default: `20`)                                | Number of neighboring nodes considered in graph construction. |
 | `--cachedir`, `-cd`     | `Path`                                               | Directory to store cached protein structure features.        |
-| `--probs`, `-p`         | *bool*                                               | Output per-residue sequence probabilities.                   |
-| `--logits`, `-l`        | *bool*                                               | Output raw model logits instead of probabilities.            |
-| `--rank_by_prob`, `-rp` | *bool*                                               | Rank mutations by predicted mutation probability.            |
+| `--probs`, `-p`         | `flag`                                               | Output per-residue sequence probabilities.                   |
+| `--logits`, `-l`        | `flag`                                               | Output raw model logits instead of probabilities.            |
+| `--rank_by_prob`, `-rp` | `flag`                                              | Rank mutations by predicted mutation probability.            |
 | `--res`, `-res`         | `Comma-separated list` (e.g., `83,123`)              | Restrict output to specific residue positions.               |
 
 
