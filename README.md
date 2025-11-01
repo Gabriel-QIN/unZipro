@@ -14,11 +14,12 @@ unZipro (<u>un</u>supervised Zero-shot <u>i</u>nverse folding framework for <u>p
 
 By combining generalizable constraints with family-specific adaptation, unZipro efficiently identifies functional mutations without exhaustive screening, drastically saving time and resources.
 
-### How it works
-unZipro is comprised of a two-step learning:
+### ⚙️ How it works
+unZipro tackles protein engineering like “hunting for the needle in the haystack”:
 
 - 🧠 Zero-shot transfer learning captures a universal protein fitness landscape.
-- 🧩 Meta-learning adapts to family-specific fitness landscapes for more precise high-fitness variant prioritization.
+- 🧩 Meta-learning adapts to family-specific fitness landscapes.
+- Prioritization of the most promising high-fitness variants for experimental validation.
 
 ### 🚀 Key Features of unZipro
 
@@ -65,24 +66,14 @@ python script/unZipro_pretrain.py \
 ```
 
 ### Finetuning
-#### 1. Run Foldseek Search on PDB100 and AFDB50 Datasets
-You can perform structure-based searches using Foldseek on your local machine.
-For users who want to set up Foldseek on their local server, please refer to [here](docs/foldseek.md)..
-If you prefer not to run locally, you can use the official Foldseek Web Server:
-👉 https://search.foldseek.com/search
-runs/evaluate_pretrained_model.sh
-
-#### 2. Download data
-```sh
-python script/fetch_PDB_parallel.py -i data/finetuned/PDB_IDs.txt -o data/finetuned/PDB -m RCSB ps -cpu 8
-python script/fetch_PDB_parallel.py -i data/finetuned/AFDB_IDs.txt -o data/finetuned/PDB -m AF ps -cpu 8
+Run unZipro fine-tuning easily with the following command.  
 ```
-
-#### 3. Finetuning
-
-#### 3. Finetuning
-
-#### Run inference
+# Before runnning, you must prepare your train/valid dataset (each file with corresponding PDB IDs)
+# Ensure your PDB files are in `pdbdir`
+name=P53_HUMAN
+python script/unZipro_finetuning.py --train data/finetuned_dataset/${name}/train.csv --valid data/finetuned_dataset/${name}/test.csv --project_name unZipro_${name} --model Models/finetuned/${name} --pdbdir data/finetuned_dataset/PDB/ --cache_dir data/finetuned_dataset/tmp/ --epoch 20 
+```
+For more details, see [Finetuning](docs/finetuning.md).
 
 ### High-fitness mutation recommendation
 >This is the core module of **unZipro** — predicting high-fitness mutations
