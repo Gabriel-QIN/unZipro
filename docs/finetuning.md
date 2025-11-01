@@ -94,7 +94,7 @@ python script/fetch_PDB_parallel.py -i data/finetuned_dataset/PDB_IDs.txt -o dat
 ```sh
 # Set protein name
 name=P53_HUMAN
-python script/unZipro_finetuning.py --train data/finetuned_dataset/${name}/train.csv --valid data/finetuned_dataset/${name}/test.csv --project_name unZipro_${name} --model Models/finetuned/${name} --pdbdir data/finetuned_dataset/PDB/ --cache_dir data/finetuned_dataset/tmp/ --epoch 20 
+python script/unZipro_finetuning.py --train data/finetuned_dataset/${name}/train.csv --valid data --config_path config/unZipro_pretrain.json finetuned_dataset/${name}/test.csv --project_name unZipro_${name} --model Models/finetuned/${name} --pdbdir data/finetuned_dataset/PDB/ --cache_dir data/finetuned_dataset/tmp/ --epoch 20 
 ```
 ### 3.2 Batch Submission for finetuning multiple proteins
 ```sh
@@ -104,6 +104,7 @@ while read -r name; do
     python script/unZipro_finetuning.py \
         --train "data/finetuned_dataset/${name}/train.csv" \
         --valid "data/finetuned_dataset/${name}/test.csv" \
+        --config_path config/unZipro_pretrain.json \
         --project_name "unZipro_${name}" \
         --model "Models/finetuned/${name}" \
         --pdbdir "data/finetuned_dataset/PDB/" \
@@ -114,4 +115,4 @@ while read -r name; do
 done < "$protein_list"
 ```
 >Note:
-> - Fine-tuning typically takes ~5 minutes on GPU / ~10 minutes on CPU.
+> - Fine-tuning typically takes 1-3 minutes on GPU / 5-10 minutes on CPU.
