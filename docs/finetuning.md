@@ -87,7 +87,7 @@ python script/parse_foldseek_results.py --pdb data/example/example.txt --foldsee
 python script/fetch_PDB_parallel.py -i data/finetuned_dataset/PDB_IDs.txt -o data/finetuned_dataset/PDB -cpu 8
 ```
 >- Note: Some PDB files may fail to download. In such cases, simply skip them. The overall training dataset is expected to contain ~100 structures.
->- Most of the PDB structures are solution NMR structures and generally have low resolution. Users should be aware of potential limitations when using these structures for modeling or analysis.
+>- Some of the PDB structures are solution NMR structures and generally have low resolution. Users should be aware of potential limitations when using these structures for modeling or analysis.
 >- If your query structure has no matches in the provided databases, we strongly recommend creating your own dataset, *e.g.*, by retrieving homologs based on sequence similarity.
 ## 3. unZipro finetuning strategy
 ### 3.1 Finetuning on a single protein
