@@ -108,10 +108,15 @@ and sequence fitness heatmaps.
 We thank the contributors of PyTorch, learn2learn, AFDB, and Foldseek for providing foundational tools for this work.
 
 unZipro draws inspiration and leverages/modifies implementations from the following repositories:
-jingraham/neurips19-graph-protein-design for the preprocessed CATH dataset and data pipeline implementation.
-facebook/esm for their ESM implementations, pretrained model weights, and data pipeline components like Alphabet.
-dauparas/ProteinMPNN for the ProteinMPNN implementation and multi-chain dataset.
-A4Bio/PiFold for their PiFold implementation.
+
+- jingraham/neurips19-graph-protein-design for the preprocessed CATH dataset and data pipeline implementation.
+
+- facebook/esm for their ESM implementations, pretrained model weights, and data pipeline components like Alphabet.
+
+- dauparas/ProteinMPNN for the ProteinMPNN implementation and multi-chain dataset.
+
+- A4Bio/PiFold for their PiFold implementation.
+
 We express our sincere appreciation to the authors of these repositories for their invaluable contributions to the development of ByProt.
 
 ## 📖 Citation
