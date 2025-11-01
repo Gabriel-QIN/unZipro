@@ -122,23 +122,6 @@ Following are some provided `examples`:
 | **Plant proteins**     | `runs/run_plantTF.sh`    | DNA-binding domains of plant transcription factors      |
 |                        | `runs/run_R_protein.sh`  | Plant virus-resistance (R) proteins      
 
-### Experimental validation
-
-unZipro was validated across 9 diverse protein engineering tasks, achieving consistent improvements in functional assays:
-
-|               Target                |             Objective             |
-| :---------------------------------: | :-------------------------------: |
-|       **Deaminase (TadA8e)**        | Improved base-editing efficiency  |
-| **Nucleases (SpCas9, CasΦ2, T5E)**  | Enhanced genome-editing activity  |
-| **Reverse transcriptase (MMLV-RT)** | Boosted prime-editing efficiency  |
-|           **Luciferase**            | Increased fluorescence intensity  |
-|   **Plant transcription factors**   | Enhanced transcriptional activity |
-|        **Plant R-proteins**         |    Reduced pathogen virulence     |
-
-> unZipro achieves up to 28× improvement in desired protein properties,
-and the success rate of high-fitness variants (>1.1× WT) reaches up to 100% (average 61%).
-
-
 ## 🙏 Acknowledgements
 We thank the contributors of PyTorch, learn2learn, AFDB, and Foldseek for providing foundational tools for this work.
 
