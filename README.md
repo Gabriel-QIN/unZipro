@@ -126,14 +126,14 @@ Following are some provided `examples`:
 
 unZipro was validated across 9 diverse protein engineering tasks, achieving consistent improvements in functional assays:
 
-| Task | Target                              | Objective                         |
-| ---- | ----------------------------------- | --------------------------------- |
-| 1    | **Deaminase (TadA8e)**              | Improved base-editing efficiency  |
-| 2    | **Nucleases (SpCas9, CasΦ2, T5E)**  | Enhanced genome-editing activity  |
-| 3    | **Reverse transcriptase (MMLV-RT)** | Boosted prime-editing efficiency  |
-| 4    | **Luciferase**                      | Increased fluorescence intensity  |
-| 5    | **Plant transcription factors**     | Enhanced transcriptional activity |
-| 6    | **Plant R-proteins**                | Reduced pathogen virulence        |
+|               Target                |             Objective             |
+| :---------------------------------: | :-------------------------------: |
+|       **Deaminase (TadA8e)**        | Improved base-editing efficiency  |
+| **Nucleases (SpCas9, CasΦ2, T5E)**  | Enhanced genome-editing activity  |
+| **Reverse transcriptase (MMLV-RT)** | Boosted prime-editing efficiency  |
+|           **Luciferase**            | Increased fluorescence intensity  |
+|   **Plant transcription factors**   | Enhanced transcriptional activity |
+|        **Plant R-proteins**         |    Reduced pathogen virulence     |
 
 > unZipro achieves up to 28× improvement in desired protein properties,
 and the success rate of high-fitness variants (>1.1× WT) reaches up to 100% (average 61%).
