@@ -12,7 +12,7 @@ Official PyTorch implementation of **unZipro** — an unsupervised zero-shot inv
 
 unZipro (<u>un</u>supervised Zero-shot <u>i</u>nverse folding framework for <u>pro</u>tein evolution) is a lightweight graph neural network (GNN)-based framework designed for AI-guided protein engineering.
 
-By combining generalizable constraints with family-specific adaptation, unZipro efficiently identifies functional mutations without exhaustive screening, drastically saving time and resources.
+By combining general inverse folding constraints with family-specific adaptation, unZipro efficiently prioritizes high-fitness mutations without exhaustive screening.
 
 ## ⚙️ How it works
 unZipro tackles protein engineering like “hunting for the needle in the haystack”:
@@ -46,15 +46,8 @@ We prepared a convenient google colab notebook to perform the unZipro code funct
 git clone https://github.com/Gabriel-Qin/unZipro.git
 cd unZipro
 
-conda create -n unZipro python=3.9
-conda activate unZipro
-
-pip install numpy pandas biotite learn2learn requests
-
-# Install PyTorch (CUDA 12.4)
-pip install torch==2.4.1+cu124 torchvision==0.19.1+cu124 --index-url https://download.pytorch.org/whl/cu124
-# Note: PyTorch ≥ 2.0 is also supported. Please select the appropriate CUDA version for your GPU.
-# FYI, please refer to: https://pytorch.org/get-started/locally/
+# Install dependencies and PyTorch automatically
+pip install -r runs/install_unZipro.sh
 ```
 Alternatively, you can simply run:
 ```sh

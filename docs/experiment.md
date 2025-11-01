@@ -20,7 +20,7 @@ and the success rate of high-fitness variants (>1.1× WT) reaches up to 100% (av
 
 Each script reproduces the mutation prioritization results for a specific protein category.
 The results include ranked residue-wise mutation probabilities, and predicted high-fitness variants.
-All scripts can be executed directly after environment setup (see [Installation](runs/install_unZipro.sh))
+All scripts can be executed directly after environment setup (see [Installation](https://github.com/Gabriel-QIN/unZipro/blob/master/runs/install_unZipro.sh))
 
 💡 Tip:
 You can modify the --pdb, --param, and --outdir flags in each script to test your own proteins or finetuned models.

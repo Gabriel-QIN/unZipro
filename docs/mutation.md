@@ -15,7 +15,7 @@ Command-line Flags for `unZipro_mutation.py`:
 | `--rank_by_prob`, `-rp` | `store_true`                                              | Rank mutations by predicted mutation probability.            |
 | `--res`, `-res`         | `comma-separated list` (e.g., `83,123`)              | Restrict output to specific residue positions.               |
 
-For example to make a conda environment to run unZipro, see [install](runs/install_unZipro.sh):
+For example to make a conda environment to run unZipro, see [install](https://github.com/Gabriel-QIN/unZipro/blob/master/runs/):
 
 Following are provided `examples`:
 
