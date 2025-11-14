@@ -1,7 +1,7 @@
-# unZipro
-<p align="center">
-  <img src="image/unZipro_logo.png" alt="unZipro logo" width="200">
-</p>
+<div style="display: flex; align-items: center;">
+  <img src="image/unZipro_logo.png" alt="unZipro logo" width="80" style="margin-right: 10px;">
+  <h1>unZipro</h1>
+</div>
 <a href=""><img src="https://img.shields.io/badge/Paper-bioRxiv-green" style="max-width: 100%;"></a>
 <a href="https://huggingface.co/unZipro"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-red?label=unZipro" style="max-width: 100%;"></a>
 <a href="https://colab.research.google.com/github/Gabriel-Qin/unZipro/blob/main/notebooks/unZipro.ipynb">
