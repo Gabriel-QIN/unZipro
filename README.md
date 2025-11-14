@@ -31,6 +31,7 @@ unZipro tackles protein engineering like “hunting for the needle in the haysta
 3. High accuracy – achieves an average of 61% success for high-fitness mutations (>1.1× WT), with up to 100% success and 28× improvement in desired properties.
 4. Broad applicability – experimentally validated across enzyme, nucleases, polymerases, transcription factors, virus-resistance proteins, with potential for more protein engineering applications.
 5. Structure-flexible: supports both experimentally-resoveled structures and AlphaFold-predicted models.
+![unZipro Applications](image/unZipro_intro.jpg)
 
 ## 🌱 Applications
 
