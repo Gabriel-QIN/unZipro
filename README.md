@@ -1,8 +1,6 @@
 # unZipro
 
 <div style="display: flex; align-items: center;">
-  <img src="image/easy_workflow.png" alt="unZipro logo" width="80" style="margin-right: 15px;">
-
   <div style="margin-left: auto; display: flex; align-items: center; gap: 5px;">
     <a href=""><img src="https://img.shields.io/badge/Paper-bioRxiv-green" style="max-width: 100%;"></a>
     <a href="https://huggingface.co/unZipro"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-red?label=unZipro" style="max-width: 100%;"></a>
@@ -12,6 +10,7 @@
   </div>
 </div>
 
+![unZipro workflow](image/easy_workflow.png)
 
 Official PyTorch implementation of **unZipro** — an unsupervised zero-shot inverse folding framework for protein evolution and high-fitness variant prediction.
 
