@@ -1,14 +1,11 @@
 # unZipro
 
-<div style="display: flex; align-items: center;">
-  <div style="margin-left: auto; display: flex; align-items: center; gap: 5px;">
-    <a href=""><img src="https://img.shields.io/badge/Paper-bioRxiv-green" style="max-width: 100%;"></a>
-    <a href="https://huggingface.co/unZipro"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-red?label=unZipro" style="max-width: 100%;"></a>
-    <a href="https://colab.research.google.com/github/Gabriel-Qin/unZipro/blob/main/notebooks/unZipro.ipynb">
-      <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-    </a>
-  </div>
-</div>
+[![Paper](https://img.shields.io/badge/Paper-bioRxiv-green)]()
+[![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-red?label=unZipro)](https://huggingface.co/unZipro)
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Gabriel-Qin/unZipro/blob/main/notebooks/unZipro.ipynb)
+
+---
+
 Official PyTorch implementation of **unZipro** — an unsupervised zero-shot inverse folding framework for protein evolution and high-fitness variant prediction.
 
 ![unZipro workflow](image/easy_workflow.png)
