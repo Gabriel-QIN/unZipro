@@ -5,7 +5,9 @@
 <a href="https://colab.research.google.com/github/Gabriel-Qin/unZipro/blob/main/notebooks/unZipro.ipynb">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-
+<p align="center">
+  <img src="image/unZipro_logo.png" alt="unZipro logo" width="200">
+</p>
 Official PyTorch implementation of **unZipro** — an unsupervised zero-shot inverse folding framework for protein evolution and high-fitness variant prediction.
 
 # Overview
@@ -13,6 +15,7 @@ Official PyTorch implementation of **unZipro** — an unsupervised zero-shot inv
 unZipro (<u>un</u>supervised Zero-shot <u>i</u>nverse folding framework for <u>pro</u>tein evolution) is a lightweight graph neural network (GNN)-based framework designed for AI-guided protein engineering.
 
 By combining general inverse folding constraints with family-specific adaptation, unZipro efficiently prioritizes high-fitness mutations without exhaustive screening.
+![unZipro overview](image/unZipro_easy.png)
 
 ## ⚙️ How it works
 unZipro tackles protein engineering like “hunting for the needle in the haystack”:
