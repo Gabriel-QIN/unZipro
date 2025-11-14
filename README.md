@@ -1,13 +1,13 @@
 # unZipro
-
+<p align="center">
+  <img src="image/unZipro_logo.png" alt="unZipro logo" width="200">
+</p>
 <a href=""><img src="https://img.shields.io/badge/Paper-bioRxiv-green" style="max-width: 100%;"></a>
 <a href="https://huggingface.co/unZipro"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-red?label=unZipro" style="max-width: 100%;"></a>
 <a href="https://colab.research.google.com/github/Gabriel-Qin/unZipro/blob/main/notebooks/unZipro.ipynb">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<p align="center">
-  <img src="image/unZipro_logo.png" alt="unZipro logo" width="200">
-</p>
+
 Official PyTorch implementation of **unZipro** — an unsupervised zero-shot inverse folding framework for protein evolution and high-fitness variant prediction.
 
 # Overview
@@ -15,7 +15,7 @@ Official PyTorch implementation of **unZipro** — an unsupervised zero-shot inv
 unZipro (<u>un</u>supervised Zero-shot <u>i</u>nverse folding framework for <u>pro</u>tein evolution) is a lightweight graph neural network (GNN)-based framework designed for AI-guided protein engineering.
 
 By combining general inverse folding constraints with family-specific adaptation, unZipro efficiently prioritizes high-fitness mutations without exhaustive screening.
-![unZipro overview](image/unZipro_easy.png)
+![unZipro Applications](image/unZipro_intro.jpg)
 
 ## ⚙️ How it works
 unZipro tackles protein engineering like “hunting for the needle in the haystack”:
@@ -31,7 +31,7 @@ unZipro tackles protein engineering like “hunting for the needle in the haysta
 3. High accuracy – achieves an average of 61% success for high-fitness mutations (>1.1× WT), with up to 100% success and 28× improvement in desired properties.
 4. Broad applicability – experimentally validated across enzyme, nucleases, polymerases, transcription factors, virus-resistance proteins, with potential for more protein engineering applications.
 5. Structure-flexible: supports both experimentally-resoveled structures and AlphaFold-predicted models.
-![unZipro Applications](image/unZipro_intro.jpg)
+
 
 ## 🌱 Applications
 
