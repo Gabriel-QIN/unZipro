@@ -59,8 +59,6 @@ sudo apt update && sudo apt install -y aria2
 python script/foldseek_api.py --pdb SpCas9  --outdir data/Foldseek_search/ --pdb_dir data/example/ --wait_time 30
 # Batch submit to Foldseek server
 python script/foldseek_api.py --pdb data/example/example.txt  --outdir data/Foldseek_search/ --pdb_dir data/example/ --wait_time 30
-
-python script/foldseek_api.py --pdb data/example/task_pdb.txt  --outdir data/Foldseek_search/ --pdb_dir data/example/ --wait_time 30
 ```
 #### ii) Submit via the official web interface
 - For manual or small-scale queries.

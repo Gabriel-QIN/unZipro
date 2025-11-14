@@ -4,11 +4,6 @@ __pycache__/
 *.pyo
 *.pyd
 
-# Virtual environment
-venv/
-.env/
-*.env
-
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints/
 
@@ -16,9 +11,51 @@ venv/
 *.log
 *.tmp
 
-# PyTorch checkpoints
+# data files and logs
+data/pretrained/PDB
+data/benchmark/seq_design/TS50
+data/benchmark/seq_design/T500
+data/benchmark/seq_design/CASP14
+data/benchmark/seq_design/CASP15
+data/benchmark/seq_design/PDB50
+data/benchmark/seq_design/CAMEO
+data/pretrained/tmp
+data/pretrained/demo*txt
+data/benchmark/Mutation/ProteinGym_AF2_structures/
+
+
+# script
+script/split_pdbs.py
+script/cif2pdb.py
+script/unZipro_pretrain_parallel.py
+script/foldseek_api_old.py
+script/GNN_finetuning.py
+script/unZipro_finetuning_copy.py
+
+# model / PyTorch checkpoints
 *.pt
 *.pth
+*pkl
+Models/old/
+Models/unZipro_pretrain/
+Models/full/
+Models/default_param.pt
+Models/default_param_2.pt
 
 # data
 data/finetuned/homologs/homolog_info.csv
+data/finetuned_dataset/PDB/
+data/Foldseek_search/
+data/Foldseek_search/AMFR_HUMAN
+data/Foldseek_search/P53_HUMAN
+data/Foldseek_search/SPG1_STRSG
+data/Foldseek_search/SPIKE_SARS2
+
+plots/
+data/
+Models/
+tmp/
+Models/
+outputs/
+README_bak.md
+benchmark/

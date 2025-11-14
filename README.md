@@ -58,19 +58,7 @@ After installation, verify the environment with:
 python -c "import torch; print(torch.__version__, torch.cuda.is_available())" # Expected output: `2.4.1+cu124 True`
 ```
 This confirms that PyTorch is correctly installed and GPU acceleration is available.
-### Install Foldseek
-Foldseek is required for unZipro finetuning.
- You can easily install it via **conda**:
 
-```sh
-conda install -c bioconda foldseek
-```
-
-> After installation, verify that Foldseek is available:
-
-```sh
-foldseek version
-```
 ## Pretraining
 You can reproce the unZipro pre-training and evaluation following the instructions from [Pre-training](docs/pretrain.md).
 
@@ -98,24 +86,18 @@ python script/unZipro_finetuning.py --train data/finetuned_dataset/${name}/train
 For more details, see [Finetuning](docs/finetuning.md).
 
 ## High-fitness mutation prioritization
+
 > unZipro predicts and prioritizes beneficial mutations directly from protein structures, enabling structure-aware protein engineering without supervised fine-tuning.
 
 ### Inference Example:
 ```sh
-python script/unZipro_mutation.py \
-    --pdb 6vpcE \
-    --param Models/finetuned/unZipro_ABE.pt \
-    --outdir outputs/mutation/genome_editing/ABE \
-    --name TadA8e \
-    --rank_by_prob --logits --probs
+python script/main.py --pdb 6vpcE --pdb_dir data/example/ --outdir data/outputs/ --work_dir data/tmp --rank_by_prob
 ```
 The outputs include:
 
 - Per-residue mutation probabilities/logits
 
 - Ranked potential high-fitness mutations
-
-- Sequence fitness heatmaps
 
 Following are some provided `examples`:
 
@@ -129,22 +111,16 @@ Following are some provided `examples`:
 |                        | `runs/run_R_protein.sh`  | Plant virus-resistance (R) proteins      
 
 ## 🙏 Acknowledgements
-We thank the contributors of PyTorch, learn2learn, AFDB, and Foldseek for providing foundational tools for this work.
+We gratefully acknowledge the open-source community for providing valuable tools and insights that inspired the development of unZipro.
+This work builds upon ideas and methodologies introduced by previous research in AI/ML, protein inverse folding, and homolog search.
 
-unZipro draws inspiration and leverages/modifies implementations from the following repositories:
+In particular, we recognize the contributions of prior works including many graph-based protein design frameworks and Foldseek, which have laid the foundation for advances in structure-informed protein engineering.
 
-- jingraham/neurips19-graph-protein-design for the preprocessed CATH dataset and data pipeline implementation.
+We sincerely thank the authors of these repositories for their pioneering efforts and their invaluable contributions to the broader scientific community.
 
-- facebook/esm for their ESM implementations, pretrained model weights, and data pipeline components like Alphabet.
-
-- dauparas/ProteinMPNN for the ProteinMPNN implementation and multi-chain dataset.
-
-- A4Bio/PiFold for their PiFold implementation.
-
-We express our sincere appreciation to the authors of these repositories for their invaluable contributions to the development of ByProt.
+## License
+Distributed under [BSD 3-Clause](https://github.com/Gabriel-QIN/unZipro/blob/master/LICENSE) license.
 
 ## 📖 Citation
 
 If you use unZipro in your research, please cite:
-
-(preprint / paper link to be added here)
