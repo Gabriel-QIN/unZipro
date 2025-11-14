@@ -9,10 +9,10 @@
     </a>
   </div>
 </div>
+Official PyTorch implementation of **unZipro** — an unsupervised zero-shot inverse folding framework for protein evolution and high-fitness variant prediction.
 
 ![unZipro workflow](image/easy_workflow.png)
 
-Official PyTorch implementation of **unZipro** — an unsupervised zero-shot inverse folding framework for protein evolution and high-fitness variant prediction.
 
 # Overview
 
