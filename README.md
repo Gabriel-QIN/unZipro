@@ -1,7 +1,7 @@
 # unZipro
 
 <div style="display: flex; align-items: center;">
-  <img src="image/unZipro_logo.png" alt="unZipro logo" width="80" style="margin-right: 15px;">
+  <img src="image/easy_workflow.png" alt="unZipro logo" width="80" style="margin-right: 15px;">
 
   <div style="margin-left: auto; display: flex; align-items: center; gap: 5px;">
     <a href=""><img src="https://img.shields.io/badge/Paper-bioRxiv-green" style="max-width: 100%;"></a>
@@ -20,7 +20,7 @@ Official PyTorch implementation of **unZipro** — an unsupervised zero-shot inv
 unZipro (<u>un</u>supervised Zero-shot <u>i</u>nverse folding framework for <u>pro</u>tein evolution) is a lightweight graph neural network (GNN)-based framework designed for AI-guided protein engineering.
 
 By combining general inverse folding constraints with family-specific adaptation, unZipro efficiently prioritizes high-fitness mutations without exhaustive screening.
-![unZipro Applications](image/unZipro_intro.jpg)
+![unZipro Applications](image/applications.png)
 
 ## ⚙️ How it works
 unZipro tackles protein engineering like “hunting for the needle in the haystack”:
