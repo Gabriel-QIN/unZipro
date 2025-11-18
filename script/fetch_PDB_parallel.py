@@ -17,8 +17,12 @@ def fetch_and_save(pdb, outdir="PDB_structures", verbose=False):
     """
     os.makedirs(outdir, exist_ok=True)
     # Determine pdb_name and chain_id
-    if pdb.startswith("AF_") or 'model' in pdb:
+    if pdb.startswith("AF_") or 'model' in pdb or :
         pdb_name = pdb.split('-')[0]
+        chain_id = 'A'
+        mode = "AFDB"
+    elif re.match(r'^[A-NR-Z][0-9A-Z]{5,9}$', pdb):
+        pdb_name = pdb_name
         chain_id = 'A'
         mode = "AFDB"
     elif pdb.isalnum():
