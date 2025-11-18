@@ -136,7 +136,7 @@ def unZipro_finetune(train_file, valid_file, config_path="contig/unZipro_pretrai
     except:
         new_state_dict = {k.replace("module.", ""):v for k,v in state_dict.items()}
         model.load_state_dict(new_state_dict)
-    meta_model = l2l.algorithms.MAML(model, lr=adapt_lr, first_order=True, allow_unused=True)
+    meta_model = l2l.algorithms.MAML(model, lr=adapt_lr, first_order=True) # , allow_unused=True) deprecated in the newer version
     optimizer = torch.optim.Adam(meta_model.parameters(), lr=meta_lr)
     criterion = nn.CrossEntropyLoss().to(device)
 
