@@ -88,7 +88,7 @@ def fetch_and_save(pdb, outdir="PDB_structures", verbose=False):
 def safe_fetch(pdb_id, pdb_dir):
     try:
         fetch_and_save(pdb_id, pdb_dir)
-        print(f"✅ Downloaded {pdb_id}")
+        print(f"✅ Download {pdb_id}")
     except Exception as e:
         print(f"❌ Failed to download {pdb_id}: {e}")
 
