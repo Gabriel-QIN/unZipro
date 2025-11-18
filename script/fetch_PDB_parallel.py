@@ -1,4 +1,5 @@
 import os
+import re
 import argparse
 import requests
 from tempfile import gettempdir
