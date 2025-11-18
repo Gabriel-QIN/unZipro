@@ -1,4 +1,4 @@
-# unZipro  [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Gabriel-Qin/unZipro/blob/main/notebooks/unZipro.ipynb)  [![GitHub](https://img.shields.io/badge/-GitHub-181717?logo=github&logoColor=white)](https://github.com/Gabriel-Qin/unZipro)  [![Server Status](https://img.shields.io/badge/unZipro-server-brightgreen)](https://ai4bio.online/unZipro/home)
+# unZipro  [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Gabriel-QIN/unZipro/blob/master/notebooks/unZipro.ipynb)  [![GitHub](https://img.shields.io/badge/-GitHub-181717?logo=github&logoColor=white)](https://github.com/Gabriel-Qin/unZipro)  [![Server Status](https://img.shields.io/badge/Website-unZipro-green)](https://ai4bio.online/unZipro/home)
 
 
 
