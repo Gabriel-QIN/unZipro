@@ -148,8 +148,8 @@ def infer_single_protein(model, criterion, loader, pdbdir, outdir, temperature=1
             time_list.append([name, dt])
     time_df = pd.DataFrame(time_list)
     time_df.columns = ['Name', 'Time']
-    print(time_df)
-    time_df.to_csv(f'unZipro_time.csv', sep='\t')
+    # print(time_df)
+    ### time_df.to_csv(f'unZipro_time.csv', sep='\t')
 
     total_time = time_df['Time'].sum()
     print(f"Total time: {total_time:.3f} s")
