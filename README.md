@@ -117,7 +117,7 @@ Following are some provided `examples`:
 
 ## 🙏 Acknowledgements
 We gratefully acknowledge the open-source community for providing valuable tools and insights that inspired the development of unZipro.
-This work builds upon ideas and methodologies introduced by previous research in AI/ML, protein inverse folding, and homolog search.
+This work builds upon ideas and methodologies introduced by previous research in AI/ML, protein design, and AIxbio community.
 
 In particular, we recognize the contributions of prior works including many graph-based protein design frameworks and Foldseek, which have laid the foundation for advances in structure-informed protein engineering.
 
