@@ -3,6 +3,8 @@
 import os
 import sys
 sys.path.insert(0, os.path.dirname(__file__))
+dir_script = osp.dirname(osp.realpath(__file__))
+sys.path.append(dir_script+'/../')
 import os.path as osp
 import time
 import json
@@ -13,8 +15,6 @@ import torch.nn as nn
 import learn2learn as l2l
 from torch.utils.data import DataLoader,random_split
 from tqdm import tqdm
-dir_script = osp.dirname(osp.realpath(__file__))
-sys.path.append(dir_script+'/../')
 from utils import *
 from model import unZipro, weights_init
 

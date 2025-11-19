@@ -11,7 +11,8 @@ import json
 import argparse
 from tempfile import gettempdir
 from concurrent.futures import ThreadPoolExecutor
-
+dir_script = osp.dirname(osp.realpath(__file__))
+sys.path.append(dir_script+'/../')
 import numpy as np
 import torch
 import torch.nn as nn
