@@ -1,4 +1,4 @@
-# unZipro  [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Gabriel-QIN/unZipro/blob/master/notebooks/unZipro.ipynb)  [![GitHub](https://img.shields.io/badge/-GitHub-181717?logo=github&logoColor=white)](https://github.com/Gabriel-Qin/unZipro)  [![Server Status](https://img.shields.io/badge/Website-unZipro-green)](https://ai4bio.online/unZipro/home)  [![License](https://img.shields.io/badge/License-Apache%202.0-blue)](https://opensource.org/licenses/Apache-2.0)  [![Python Version](https://img.shields.io/badge/Python-3.7%2B-blue)](https://www.python.org/)
+# unZipro  [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Gabriel-QIN/unZipro/blob/master/notebooks/unZipro.ipynb)  [![Server Status](https://img.shields.io/badge/Website-unZipro-green)](https://ai4bio.online/unZipro/home)  [![GitHub](https://img.shields.io/badge/-GitHub-181717?logo=github&logoColor=white)](https://github.com/Gabriel-Qin/unZipro)  [![Python Version](https://img.shields.io/badge/Python-3.7%2B-blue)](https://www.python.org/)  [![License](https://img.shields.io/badge/License-Apache%202.0-blue)](https://opensource.org/licenses/Apache-2.0)  
 
 
 
@@ -124,7 +124,7 @@ In particular, we recognize the contributions of prior works including many grap
 We sincerely thank the authors of these repositories for their pioneering efforts and their invaluable contributions to the broader scientific community.
 
 ## License
-Distributed under [BSD 3-Clause](https://github.com/Gabriel-QIN/unZipro/blob/master/LICENSE) license.
+Distributed under [Apache 2.0](https://github.com/Gabriel-QIN/unZipro/blob/master/LICENSE) license.
 
 ## 📖 Citation
 
