@@ -14,10 +14,13 @@ conda activate unZipro
 ### pretrained model
 python script/unZipro_mutation.py \
     --pdb 6vpcE,6vpcF \
+    --pdbdir data/example/ \
+    --gpu 0 \
     --param Models/unZipro_params.pt \
     --outdir outputs/mutation/genome_editing/ABE_pretrained \
     --name TadA8e \
-    --rank_by_prob
+    --rank_by_prob \
+    --logits
 
 ### finetuned model
 python script/unZipro_mutation.py \

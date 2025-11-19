@@ -12,17 +12,23 @@
 
 python script/unZipro_mutation.py \
     --pdb OsPHR2 \
+    --pdbdir data/example/ \
+    --gpu 0 \
     --param Models/finetuned/unZipro_OsPHR2.pt \
     --outdir outputs/mutation/plantTF \
     --name OsPHR2 \
-    --rank_by_prob
+    --rank_by_prob \
+    --logits
 
 # ----------------------------------------------------------------------
 # OsNAC3 (AlphaFold3 predicted, DNA binding domain 24-143, pLDDT=0.90)
 # ----------------------------------------------------------------------
 python script/unZipro_mutation.py \
     --pdb OsNAC3 \
+    --pdbdir data/example/ \
+    --gpu 0 \
     --param Models/finetuned/unZipro_OsNAC3.pt \
     --outdir outputs/mutation/plantTF \
     --name OsNAC3 \
-    --rank_by_prob
+    --rank_by_prob \
+    --logits

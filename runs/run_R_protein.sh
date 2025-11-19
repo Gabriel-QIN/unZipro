@@ -12,7 +12,10 @@ source ~/.bashrc
 # ------------------------------------------------------------
 python script/unZipro_mutation.py \
     --pdb hvms1 \
+    --pdbdir data/example/ \
+    --gpu 0 \
     --param Models/finetuned/unZipro_HvMS1.pt \
     --outdir outputs/mutation/plant_resistance \
     --name hvms1 \
-    --rank_by_prob
+    --rank_by_prob \
+    --logits

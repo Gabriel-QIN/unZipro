@@ -13,7 +13,10 @@ conda activate unZipro
 # ------------------------------------------------------------
 python script/unZipro_mutation.py \
     --pdb 1cliA \
+    --pdbdir data/example/ \
+    --gpu 0 \
     --param Models/finetuned/unZipro_LUC.pt \
     --outdir outputs/mutation/enzyme \
     --name LUC \
-    --rank_by_prob
+    --rank_by_prob \
+    --logits
