@@ -85,7 +85,7 @@ Run unZipro fine-tuning easily with the following command.
 ```
 # Before runnning, you must prepare your train/valid dataset (each file with corresponding PDB IDs)
 # Ensure your PDB files are in `pdbdir`
-name=P53_HUMAN
+name=TadA8e
 python script/unZipro_finetuning.py --train data/finetuned_dataset/${name}/train.csv --valid data/finetuned_dataset/${name}/test.csv --project_name unZipro_${name} --model Models/finetuned/${name} --pdbdir data/finetuned_dataset/PDB/ --cache_dir data/finetuned_dataset/tmp/ --epoch 20 
 ```
 For more details, see [Finetuning](docs/finetuning.md).
