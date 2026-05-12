@@ -78,12 +78,13 @@ Please configure your Docker environment according to the official documentation
 #### Pull image
 ```sh
 docker pull crpi-d49mzvu99jzxukne.cn-hongkong.personal.cr.aliyuncs.com/gabrielqin/unzipro:latest
+docker tag crpi-d49mzvu99jzxukne.cn-hongkong.personal.cr.aliyuncs.com/gabrielqin/unzipro:latest unzipro:latest
 ```
 
 #### Test GPU availability
 ```sh
 docker run --rm --gpus all \
-    gabrielqin/unzipro:latest \
+    unzipro:latest \
     python -c "import torch; print(torch.cuda.is_available())" # Expected output is True
 ```
 
@@ -92,7 +93,7 @@ docker run --rm --gpus all \
 docker run --rm --gpus all -it \
     -v $(pwd):/workspace/unZipro \
     -w /workspace/unZipro \
-    gabrielqin/unzipro:latest \
+    unzipro:latest \
     bash
 ```
 
@@ -107,6 +108,7 @@ python script/main.py --pdb 6vpcE --pdb_dir data/example/ --outdir data/outputs/
 ```
 #### Docker
 ```sh
+docker tag crpi-d49mzvu99jzxukne.cn-hongkong.personal.cr.aliyuncs.com/gabrielqin/unzipro:latest unzipro:latest
 docker run --rm --gpus all -it unzipro:latest \
 python script/main.py \
     --pdb 6vpcE \
