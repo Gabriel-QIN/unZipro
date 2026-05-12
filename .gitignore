@@ -11,6 +11,7 @@ __pycache__/
 # Logs and temporary files
 *.log
 *.tmp
+.gitignore
 
 # data files and logs
 data/pretrained/PDB
