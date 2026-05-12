@@ -67,6 +67,40 @@ This confirms that PyTorch is correctly installed and GPU acceleration is availa
 ## Pretraining
 You can reproce the unZipro pre-training and evaluation following the instructions from [Pre-training](docs/pretrain.md).
 
+### Pretrain on PDB50 datasets
+#### 1. Download full PDB50 dataset
+```python
+python script/fetch_PDB_parallel.py -i data/pretrained/all_PDB50.txt -o data/pretrained/PDB -m RCSB -cpu 8
+```
+#### 2. Start pre-training
+```python
+python script/unZipro_pretrain.py \
+    --train_list data/pretrained/train.txt \
+    --valid_list data/pretrained/valid.txt \
+    --pdbdir data/pretrained/PDB \
+    --epochs 100 \
+    --batchsize 10 \
+    --model Models \
+    --cachedir data/pretrained/tmp/ \
+    --project_name unZipro_pretrain
+```
+#### 3. Evaluate the pre-trained model
+You can evaluate the pre-trained unZipro model on a single benchmark dataset, for example TS50, by running:
+```dataset=TS50 && python script/unZipro_evaluate.py --project_name unZipro_${dataset}_test \
+    --input data/pretrained/benchmark/${dataset}.txt \
+    --pdbdir data/pretrained/benchmark/${dataset} \
+    --outdir outputs/seq_design \
+    --config_path config/unZipro_pretrain.json \
+    --param Models/unZipro_params.pt \
+    --gpu 0 \
+    --sampling_strategy argmax
+```
+#### 4. Batch evaluation on multiple benchmarks
+To conveniently evaluate the model across multiple benchmark datasets (e.g., PDB50), you can run the provided shell script:
+```sh
+bash runs/evaluate_pretrained_model.sh
+```
+
 Or pre-train on your own structure dataset
 ```python
 python script/unZipro_pretrain.py \
@@ -84,7 +118,8 @@ python script/unZipro_pretrain.py \
 Run unZipro fine-tuning easily with the following command.  
 ```
 # Before runnning, you must prepare your train/valid dataset (each file with corresponding PDB IDs)
-# Ensure your PDB files are in `pdbdir`
+# Or you can use the Foldseek-retrieved structures as your fine-tuninng datasets.
+# Please ensure your PDB files are in `pdbdir`
 name=ABE
 python script/unZipro_finetuning.py --train data/finetuned_dataset/${name}/train.csv --valid data/finetuned_dataset/${name}/test.csv --project_name unZipro_${name} --model Models/finetuned/${name} --pdbdir data/finetuned_dataset/PDB/ --cache_dir data/finetuned_dataset/tmp/ --epoch 20 
 ```
@@ -96,13 +131,47 @@ For more details, see [Finetuning](docs/finetuning.md).
 
 ### Inference example:
 ```sh
-python script/main.py --pdb 6vpcE --pdb_dir data/example/ --outdir data/outputs/ --work_dir data/tmp --pretrained --rank_by_prob
+python script/main.py --pdb 6vpcE --pdb_dir data/example/ --outdir data/outputs/ --work_dir data/tmp --pretrained --rank_by_prob --logits --probs
 ```
+Input flags:
+
+- `--pdb`
+   PDB name(s) for inference. Supports comma-separated PDB IDs or a text file containing multiple IDs.
+- `--pdb_dir`
+   Directory containing input PDB structure files.
+- `--outdir`
+   Directory for saving prediction outputs.
+- `--work_dir`
+   Temporary working directory for intermediate files.
+- `--pretrained`
+   Use the pretrained inverse folding model directly for mutation prioritization without fine-tuning.
+- `--rank_by_prob`
+   Rank candidate mutations according to predicted mutation probabilities.
+
+Additional optional flags:
+
+- `--gpu` / `--cpu_only`
+   Specify GPU device ID or force CPU-only inference.
+- `--probs` / `--logits`
+   Output per-residue mutation probabilities or raw logits.
+- `--res`
+   Restrict prediction outputs to specific residues (e.g., `83,123`).
+- `--epochs`, `--adapt_lr`, `--meta_lr`, `--adapt_step`
+   Hyperparameters for meta-transfer fine-tuning.
+- `--batchsize`, `--patience`, `--noise`
+   Training batch size, early stopping patience, and training noise level.
+- `--nneighbor`
+   Number of neighboring residues used in graph construction.
+- `--skip_foldseek`
+   Skip Foldseek search if precomputed results are already available.
+- `--save_model_ckp`
+   Save model checkpoints during training.
+
 The outputs include:
 
-- Per-residue mutation probabilities/logits
+- Per-residue mutation probabilities/logits at `data/outputs/{your_protein_name}.info_probs.csv` and `data/outputs/{your_protein_name}.info_logits.csv!`
 
-- Ranked potential high-fitness mutations
+- Ranked potential high-fitness mutations at `data/outputs/{your_protein_name}.info_rank_by_prob.csv`
 
 Following are some provided `examples`:
 

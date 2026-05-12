@@ -125,7 +125,7 @@ def infer_single_protein(model, criterion, loader, pdbdir, outdir, temperature=1
                 prob_df = df[selected_header]
                 savepath = osp.join(outdir, f'{name}.info_probs.csv')
                 prob_df.to_csv(savepath,index=False)
-                print(f"[INFO] Saved per-residue probability matrix  to {savepath}!")
+                print(f"[INFO] Saved per-residue probability matrix to {savepath}!")
             if output_logits:
                 selected_header = ['pdb', 'chain', 'auth_idx',  'mutation', 'mut_prob', 'model_prob', 'wt_prob', 'mut_logit', 'wt_logit',] + [f'logit_{a}' for a in mapped_20.keys()]
                 logits_df = df[selected_header]

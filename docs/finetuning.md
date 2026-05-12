@@ -113,4 +113,4 @@ while read -r name; do
 done < "$protein_list"
 ```
 >Note:
-> - Fine-tuning typically takes 1-3 minutes on GPU / 5-10 minutes on CPU.
+> - Fine-tuning typically takes 3-5 minutes on GPU / 5-10 minutes on CPU for a 300-aa-length protein.
