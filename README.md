@@ -74,9 +74,7 @@ This confirms that PyTorch is correctly installed and GPU acceleration is availa
 
 ### Docker
 A Docker image is provided to ensure a reproducible runtime environment without manually configuring dependencies.
-Please configure your Docker environment according to the official documentation:
-- [Docker installation guide](https://docs.docker.com/get-docker/)
-- [NVIDIA Container Toolkit installation guide (GPU support)](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)
+Please configure your Docker environment according to the official documentation for [Docker](https://docs.docker.com/get-docker/) and [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)
 #### Pull image
 ```sh
 docker pull crpi-d49mzvu99jzxukne.cn-hongkong.personal.cr.aliyuncs.com/gabrielqin/unzipro:latest

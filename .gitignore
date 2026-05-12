@@ -1,0 +1,16 @@
+# Python compiled files
+.gitignore
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Logs and temporary files
+*.log
+*.tmp
+*tar.gz
+data/Foldseek_search/
+data/tmp/
