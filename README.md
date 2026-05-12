@@ -94,7 +94,7 @@ For more details, see [Finetuning](docs/finetuning.md).
 
 > unZipro predicts and prioritizes beneficial mutations directly from protein structures, enabling structure-aware protein engineering without supervised fine-tuning.
 
-### Inference Example:
+### Inference example:
 ```sh
 python script/main.py --pdb 6vpcE --pdb_dir data/example/ --outdir data/outputs/ --work_dir data/tmp --pretrained --rank_by_prob
 ```
@@ -106,14 +106,14 @@ The outputs include:
 
 Following are some provided `examples`:
 
-| Category               | Script                   | Description                                             |
-| ---------------------- | ------------------------ | ------------------------------------------------------- |
-| **Genome editors**     | `runs/run_ABE.sh`        | Adenine base editor (TadA8e)                            |
-|                        | `runs/run_nuclease.sh`   | Three nucleases (SpCas9, CasΦ2/Cas12j2, T5E)            |
-|                        | `runs/run_polymerase.sh` | MMLV reverse transcriptase under multiple conformations |
-| **Fluorescent enzyme** | `runs/run_luciferase.sh` | Luciferase for improved fluorescence intensity          |
-| **Plant proteins**     | `runs/run_plantTF.sh`    | DNA-binding domains of plant transcription factors      |
-|                        | `runs/run_R_protein.sh`  | Plant virus-resistance (R) proteins      
+| Category               | Script                                                                                                      | Description                                             |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| **Genome editors**     | [`runs/run_ABE.sh`](runs/run_ABE.sh)                                                                        | Adenine base editor (TadA8e)                            |
+|                        | [`runs/run_nuclease.sh`](runs/run_nuclease.sh)                                                              | Three nucleases (SpCas9, CasΦ2/Cas12j2, T5E)            |
+|                        | [`runs/run_polymerase.sh`](runs/run_polymerase.sh)                                                          | MMLV reverse transcriptase under multiple conformations |
+| **Fluorescent enzyme** | [`runs/run_luciferase.sh`](runs/run_luciferase.sh)                                                          | Luciferase for improved fluorescence intensity          |
+| **Plant proteins**     | [`runs/run_plantTF.sh`](runs/run_plantTF.sh)                                                                | DNA-binding domains of plant transcription factors      |
+|                        | [`runs/run_R_protein.sh`](runs/run_R_protein.sh)                                                            | Plant virus-resistance (R) proteins                     |
 
 ## 🙏 Acknowledgements
 We gratefully acknowledge the open-source community for providing valuable tools and insights that inspired the development of unZipro.
