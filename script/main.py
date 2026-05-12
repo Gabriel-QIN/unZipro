@@ -19,7 +19,6 @@ import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader, random_split
 import learn2learn as l2l
-from tqdm import tqdm
 import requests
 import biotite.structure as struc
 import biotite.structure.io as strucio

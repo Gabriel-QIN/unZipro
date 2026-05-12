@@ -9,7 +9,8 @@
 conda create -n unZipro python=3.9
 conda activate unZipro
 
-pip install numpy pandas biotite requests
+pip install numpy==1.26.4 --force-reinstall
+pip install pandas biotite requests tqdm
 # pip install learn2learn ### Simply skip this given it might cause conflicts. We have upload a clean version of learn2learn to the GitHub repo.
 # Install PyTorch (CUDA 12.4)
 pip install torch==2.4.1+cu124 --index-url https://download.pytorch.org/whl/cu124

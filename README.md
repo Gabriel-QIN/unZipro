@@ -42,14 +42,14 @@ unZipro tackles protein engineering like “hunting for the needle in the haysta
 
 # Google Colab  [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Gabriel-QIN/unZipro/blob/master/notebooks/unZipro.ipynb)
 We prepared a convenient google colab notebook to perform the unZipro functionalities. 
->For optimal performance when running unZipro, we strongly recommend using a GPU with at least 32 GB of memory. This ensures sufficient memory to handle complex computations and avoid memory errors.
+>For optimal performance when running unZipro, we strongly recommend using a GPU with > 32 GB of memory. This ensures sufficient memory to handle complex computations and avoid memory errors.
 
 
 # Run unZipro on local machine
 ## Installation
-unZipro requires Python >= 3.9 and is compatible with PyTorch versions later than 2.0. Users should install the appropriate [PyTorch](https://pytorch.org/get-started/locally/) and [CUDA](https://developer.nvidia.com/cuda-downloads) versions according to your local hardware and driver environment.
-
-
+### Anaconda
+Please first install [Anaconda](https://www.anaconda.com/download) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html).
+Then create and activate a conda enviroment as follows:
 ```sh
 git clone https://github.com/Gabriel-Qin/unZipro.git
 cd unZipro
@@ -60,13 +60,116 @@ bash runs/install_unZipro.sh
 Alternatively, you can manually install all dependencies with:
 ```sh
 pip install -r requirements.txt
-
+```
+unZipro requires Python >= 3.9 and is compatible with PyTorch versions later than 2.0. Users should install the appropriate [PyTorch](https://pytorch.org/get-started/locally/) and [CUDA](https://developer.nvidia.com/cuda-downloads) versions according to your local hardware and driver environment.
+Example installation for PyTorch with CUDA 12.4:
+```sh
+pip install torch==2.4.1+cu124 --index-url https://download.pytorch.org/whl/cu124
 ```
 After installation, verify the environment with:
 ```sh
 python -c "import torch; print(torch.__version__, torch.cuda.is_available())" # Expected output: `2.4.1+cu124 True`
 ```
 This confirms that PyTorch is correctly installed and GPU acceleration is available.
+
+### Docker
+A Docker image is provided to ensure a reproducible runtime environment without manually configuring dependencies.
+Please configure your Docker environment according to the official documentation:
+- [Docker installation guide](https://docs.docker.com/get-docker/)
+- [NVIDIA Container Toolkit installation guide (GPU support)](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)
+#### Pull image
+```sh
+docker pull crpi-d49mzvu99jzxukne.cn-hongkong.personal.cr.aliyuncs.com/gabrielqin/unzipro:latest
+```
+
+#### Test GPU availability
+```sh
+docker run --rm --gpus all \
+    gabrielqin/unzipro:latest \
+    python -c "import torch; print(torch.cuda.is_available())" # Expected output is True
+```
+
+#### Start container
+```sh
+docker run --rm --gpus all -it \
+    -v $(pwd):/workspace/unZipro \
+    -w /workspace/unZipro \
+    gabrielqin/unzipro:latest \
+    bash
+```
+
+## High-fitness mutation prioritization
+
+> unZipro predicts and prioritizes beneficial mutations directly from protein structures, enabling structure-aware protein engineering without supervised fine-tuning.
+
+### Inference:
+#### Local environment
+```sh
+python script/main.py --pdb 6vpcE --pdb_dir data/example/ --outdir data/outputs/ --work_dir data/tmp --pretrained --rank_by_prob --logits --probs
+```
+#### Docker
+```sh
+docker run --rm --gpus all -it unzipro:latest \
+python script/main.py \
+    --pdb 6vpcE \
+    --pdb_dir data/example/ \
+    --outdir data/outputs/ \
+    --work_dir data/tmp \
+    --pretrained \
+    --rank_by_prob \
+    --logits \
+    --probs
+```
+Input flags:
+
+- `--pdb`
+   PDB name(s) for inference. Supports comma-separated PDB IDs or a text file containing multiple IDs.
+- `--pdb_dir`
+   Directory containing input PDB structure files.
+- `--outdir`
+   Directory for saving prediction outputs.
+- `--work_dir`
+   Temporary working directory for intermediate files.
+- `--pretrained`
+   Use the pretrained inverse folding model directly for mutation prioritization without fine-tuning.
+- `--rank_by_prob`
+   Rank candidate mutations according to predicted mutation probabilities.
+
+Additional optional flags:
+
+- `--gpu` / `--cpu_only`
+   Specify GPU device ID or force CPU-only inference.
+- `--probs` / `--logits`
+   Output per-residue mutation probabilities or raw logits.
+- `--res`
+   Restrict prediction outputs to specific residues (e.g., `83,123`).
+- `--epochs`, `--adapt_lr`, `--meta_lr`, `--adapt_step`
+   Hyperparameters for meta-transfer fine-tuning.
+- `--batchsize`, `--patience`, `--noise`
+   Training batch size, early stopping patience, and training noise level.
+- `--nneighbor`
+   Number of neighboring residues used in graph construction.
+- `--skip_foldseek`
+   Skip Foldseek search if precomputed results are already available.
+- `--save_model_ckp`
+   Save model checkpoints during training.
+
+The outputs include:
+
+- Per-residue mutation probabilities/logits at `data/outputs/{your_protein_name}.info_probs.csv` and `data/outputs/{your_protein_name}.info_logits.csv!`
+
+- Ranked potential high-fitness mutations at `data/outputs/{your_protein_name}.info_rank_by_prob.csv`
+
+Following are some provided `examples`:
+
+| Category               | Script                                                                                                      | Description                                             |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| **Genome editors**     | [`runs/run_ABE.sh`](runs/run_ABE.sh)                                                                        | Adenine base editor (TadA8e)                            |
+|                        | [`runs/run_nuclease.sh`](runs/run_nuclease.sh)                                                              | Three nucleases (SpCas9, CasΦ2/Cas12j2, T5E)            |
+|                        | [`runs/run_polymerase.sh`](runs/run_polymerase.sh)                                                          | MMLV reverse transcriptase under multiple conformations |
+| **Fluorescent enzyme** | [`runs/run_luciferase.sh`](runs/run_luciferase.sh)                                                          | Luciferase for improved fluorescence intensity          |
+| **Plant proteins**     | [`runs/run_plantTF.sh`](runs/run_plantTF.sh)                                                                | DNA-binding domains of plant transcription factors      |
+|                        | [`runs/run_R_protein.sh`](runs/run_R_protein.sh)                                                            | Plant virus-resistance (R) proteins                     |
 
 ## Pretraining
 You can reproce the unZipro pre-training and evaluation following the instructions from [Pre-training](docs/pretrain.md).
@@ -130,65 +233,6 @@ name=ABE
 python script/unZipro_finetuning.py --train data/finetuned_dataset/${name}/train.csv --valid data/finetuned_dataset/${name}/test.csv --project_name unZipro_${name} --model Models/finetuned/${name} --pdbdir data/finetuned_dataset/PDB/ --cache_dir data/finetuned_dataset/tmp/ --epoch 20 
 ```
 For more details, see [Finetuning](docs/finetuning.md).
-
-## High-fitness mutation prioritization
-
-> unZipro predicts and prioritizes beneficial mutations directly from protein structures, enabling structure-aware protein engineering without supervised fine-tuning.
-
-### Inference example:
-```sh
-python script/main.py --pdb 6vpcE --pdb_dir data/example/ --outdir data/outputs/ --work_dir data/tmp --pretrained --rank_by_prob --logits --probs
-```
-Input flags:
-
-- `--pdb`
-   PDB name(s) for inference. Supports comma-separated PDB IDs or a text file containing multiple IDs.
-- `--pdb_dir`
-   Directory containing input PDB structure files.
-- `--outdir`
-   Directory for saving prediction outputs.
-- `--work_dir`
-   Temporary working directory for intermediate files.
-- `--pretrained`
-   Use the pretrained inverse folding model directly for mutation prioritization without fine-tuning.
-- `--rank_by_prob`
-   Rank candidate mutations according to predicted mutation probabilities.
-
-Additional optional flags:
-
-- `--gpu` / `--cpu_only`
-   Specify GPU device ID or force CPU-only inference.
-- `--probs` / `--logits`
-   Output per-residue mutation probabilities or raw logits.
-- `--res`
-   Restrict prediction outputs to specific residues (e.g., `83,123`).
-- `--epochs`, `--adapt_lr`, `--meta_lr`, `--adapt_step`
-   Hyperparameters for meta-transfer fine-tuning.
-- `--batchsize`, `--patience`, `--noise`
-   Training batch size, early stopping patience, and training noise level.
-- `--nneighbor`
-   Number of neighboring residues used in graph construction.
-- `--skip_foldseek`
-   Skip Foldseek search if precomputed results are already available.
-- `--save_model_ckp`
-   Save model checkpoints during training.
-
-The outputs include:
-
-- Per-residue mutation probabilities/logits at `data/outputs/{your_protein_name}.info_probs.csv` and `data/outputs/{your_protein_name}.info_logits.csv!`
-
-- Ranked potential high-fitness mutations at `data/outputs/{your_protein_name}.info_rank_by_prob.csv`
-
-Following are some provided `examples`:
-
-| Category               | Script                                                                                                      | Description                                             |
-| ---------------------- | ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
-| **Genome editors**     | [`runs/run_ABE.sh`](runs/run_ABE.sh)                                                                        | Adenine base editor (TadA8e)                            |
-|                        | [`runs/run_nuclease.sh`](runs/run_nuclease.sh)                                                              | Three nucleases (SpCas9, CasΦ2/Cas12j2, T5E)            |
-|                        | [`runs/run_polymerase.sh`](runs/run_polymerase.sh)                                                          | MMLV reverse transcriptase under multiple conformations |
-| **Fluorescent enzyme** | [`runs/run_luciferase.sh`](runs/run_luciferase.sh)                                                          | Luciferase for improved fluorescence intensity          |
-| **Plant proteins**     | [`runs/run_plantTF.sh`](runs/run_plantTF.sh)                                                                | DNA-binding domains of plant transcription factors      |
-|                        | [`runs/run_R_protein.sh`](runs/run_R_protein.sh)                                                            | Plant virus-resistance (R) proteins                     |
 
 ## 🙏 Acknowledgements
 We gratefully acknowledge the open-source community for providing valuable tools and insights that inspired the development of unZipro.

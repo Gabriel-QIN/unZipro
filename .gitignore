@@ -23,7 +23,9 @@ data/benchmark/seq_design/CAMEO
 data/pretrained/tmp
 data/pretrained/demo*txt
 data/benchmark/Mutation/ProteinGym_AF2_structures/
-
+data/Foldseek_search/
+unzipro_latest.tar.gz
+unZipro_env.tar.gz
 
 # script
 script/split_pdbs.py
