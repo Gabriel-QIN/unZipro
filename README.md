@@ -96,7 +96,7 @@ For more details, see [Finetuning](docs/finetuning.md).
 
 ### Inference Example:
 ```sh
-python script/main.py --pdb 6vpcE --pdb_dir data/example/ --outdir data/outputs/ --work_dir data/tmp --rank_by_prob
+python script/main.py --pdb 6vpcE --pdb_dir data/example/ --outdir data/outputs/ --work_dir data/tmp --pretrained --rank_by_prob
 ```
 The outputs include:
 
