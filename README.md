@@ -47,6 +47,9 @@ We prepared a convenient google colab notebook to perform the unZipro functional
 
 # Run unZipro on local machine
 ## Installation
+unZipro requires Python >= 3.9 and is compatible with PyTorch versions later than 2.0. Users should install the appropriate [PyTorch](https://pytorch.org/get-started/locally/) and [CUDA](https://developer.nvidia.com/cuda-downloads) versions according to your local hardware and driver environment.
+
+
 ```sh
 git clone https://github.com/Gabriel-Qin/unZipro.git
 cd unZipro
@@ -57,6 +60,7 @@ bash runs/install_unZipro.sh
 Alternatively, you can manually install all dependencies with:
 ```sh
 pip install -r requirements.txt
+
 ```
 After installation, verify the environment with:
 ```sh

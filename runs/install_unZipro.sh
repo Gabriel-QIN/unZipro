@@ -3,8 +3,8 @@
 #  Bash script: install_unZipro.sh
 #  Install environment and dependencies for unZipro
 # ============================================================
-git clone https://github.com/Gabriel-Qin/unZipro.git
-cd unZipro
+# git clone https://github.com/Gabriel-Qin/unZipro.git
+# cd unZipro
 
 conda create -n unZipro python=3.9
 conda activate unZipro
