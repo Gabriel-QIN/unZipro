@@ -5,7 +5,7 @@
 python script/fetch_PDB_parallel.py -i data/pretrained/all_PDB50.txt -o data/pretrained/PDB -m RCSB -cpu 8
 ```
 #### 2. Start pre-training
-Input flags for [`script/unZipro_pretrain.py`](script/unZipro_pretrain.py):
+Input flags for [`script/unZipro_pretrain.py`](../script/unZipro_pretrain.py):
 #### Data
 - `--train_list`
   File containing training PDB IDs or structure paths.
