@@ -86,7 +86,9 @@ python script/unZipro_pretrain.py \
 ```
 #### 3. Evaluate the pre-trained model
 You can evaluate the pre-trained unZipro model on a single benchmark dataset, for example TS50, by running:
-```dataset=TS50 && python script/unZipro_evaluate.py --project_name unZipro_${dataset}_test \
+``` 
+    dataset=TS50
+    python script/unZipro_evaluate.py --project_name unZipro_${dataset}_test \
     --input data/pretrained/benchmark/${dataset}.txt \
     --pdbdir data/pretrained/benchmark/${dataset} \
     --outdir outputs/seq_design \
