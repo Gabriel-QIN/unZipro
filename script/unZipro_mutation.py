@@ -1,11 +1,11 @@
 #! /usr/bin/env python
 
 import os
+import os.path as osp
 import sys
 sys.path.insert(0, os.path.dirname(__file__))
 import time
 import json
-import os.path as osp
 import argparse
 import torch
 import torch.nn as nn

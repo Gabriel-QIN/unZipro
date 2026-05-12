@@ -1,10 +1,10 @@
 #! /usr/bin/env python
 
 import os
+import os.path as osp
 import sys
 sys.path.insert(0, os.path.dirname(__file__))
 import json
-import os.path as osp
 import time
 import numpy as np
 import torch

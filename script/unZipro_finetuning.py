@@ -2,10 +2,10 @@
 
 import os
 import sys
+import os.path as osp
 sys.path.insert(0, os.path.dirname(__file__))
 dir_script = osp.dirname(osp.realpath(__file__))
 sys.path.append(dir_script+'/../')
-import os.path as osp
 import time
 import json
 import argparse
