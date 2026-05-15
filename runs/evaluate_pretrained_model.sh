@@ -21,8 +21,8 @@ for dataset in "${datasets[@]}"; do
     echo "🚀 Running evaluation for ${dataset}..."
     python script/unZipro_evaluate.py \
         --project_name "unZipro_${dataset}_test" \
-        --input "data/pretrained/benchmark/${dataset}.txt" \
-        --pdbdir "data/pretrained/benchmark/${dataset}" \
+        --input "data/benchmark/seq_design/${dataset}.txt" \
+        --pdbdir "data/benchmark/seq_design/${dataset}" \
         --outdir "$OUTDIR" \
         --config_path "$CONFIG_PATH" \
         --param "$PARAM" \
