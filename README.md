@@ -247,4 +247,6 @@ Distributed under [Apache 2.0](https://github.com/Gabriel-QIN/unZipro/blob/maste
 
 ## 📖 Citation
 
-If you use unZipro in your research, please cite:
+If you use **unZipro** in your research, please cite:
+Qin, Z., Zhao, S., Deng, Z., Si, X., Cheng, X., Zhang, Z., Zhang, Y., Han, X., Zhang, J., Chen, Y., Liu, X., Li, J., Fu, L., You, L., Murray, J. W., Liu, H., Li, H., Li, C., Wu, S., Li, J., Chen, Z., Song, J., Wang, D., & Ji, X. 
+Simplifying in silico protein evolution with minimal screening by unZipro. Manuscript under review.
