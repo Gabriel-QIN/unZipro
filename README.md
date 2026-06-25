@@ -34,7 +34,6 @@ unZipro tackles protein engineering like “hunting for the needle in the haysta
 5. Structure-flexible: supports both experimentally-resoveled structures and AlphaFold-predicted models.
 
 
-```markdown
 ## Applications
 
 unZipro is a general-purpose framework for in silico protein evolution and can be applied to a broad range of protein engineering tasks, including:
@@ -47,7 +46,6 @@ unZipro is a general-purpose framework for in silico protein evolution and can b
 - **Protein–ligand and protein–nucleic acid interaction engineering** – improving binding affinity, specificity, and molecular recognition.
 - **Agricultural biotechnology** – engineering proteins for crop improvement, stress tolerance, herbicide resistance, nutrient utilization, and yield enhancement.
 - **General protein design** – rapid exploration of beneficial mutations for virtually any protein with known or predicted structures.
-```
 
 
 # Google Colab  [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Gabriel-QIN/unZipro/blob/master/notebooks/unZipro.ipynb)
