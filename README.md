@@ -43,7 +43,7 @@ unZipro tackles protein engineering like “hunting for the needle in the haysta
 - General protein design tasks in biotechnology & agriculture
 
 # Google Colab  [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Gabriel-QIN/unZipro/blob/master/notebooks/unZipro.ipynb)
-We prepared a convenient google colab notebook to perform the unZipro functionalities. 
+We provide a convenient [Google Colab notebook](https://colab.research.google.com/github/Gabriel-QIN/unZipro/blob/master/notebooks/unZipro.ipynb) to run unZipro on-the-fly without any local installation.
 >For optimal performance when running unZipro, we strongly recommend using a GPU with > 32 GB of memory. This ensures sufficient memory to handle complex computations and avoid memory errors.
 
 
