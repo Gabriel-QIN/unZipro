@@ -32,7 +32,7 @@ unZipro tackles protein engineering like “hunting for the needle in the haysta
 5. Structure-flexible: supports both experimentally-resoveled structures and AlphaFold-predicted models.
 
 
-## 🌱 Applications
+## Applications
 
 - Enzyme engineering 
 - Optimization of genome editing tools (e.g., SpCas9, Cas12, base editor, and prime editor)
@@ -234,7 +234,7 @@ python script/unZipro_finetuning.py --train data/finetuned_dataset/${name}/train
 ```
 For more details, see [Finetuning](docs/finetuning.md).
 
-## 🙏 Acknowledgements
+## Acknowledgements
 We gratefully acknowledge the open-source community for providing valuable tools and insights that inspired the development of unZipro.
 This work builds upon ideas and methodologies introduced by previous research in AI/ML, protein design, and AIxbio community.
 
@@ -242,12 +242,14 @@ In particular, we recognize the contributions of prior works including many grap
 
 We sincerely thank the authors of these repositories for their pioneering efforts and their invaluable contributions to the broader scientific community.
 
-## License
-Distributed under [Apache 2.0](https://github.com/Gabriel-QIN/unZipro/blob/master/LICENSE) license.
 
-## 📖 Citation
+## Citation
 
 If you use **unZipro** in your research, please cite:
 
-Qin, Z., Zhao, S., Deng, Z., Si, X., Cheng, X., Zhang, Z., Zhang, Y., Han, X., Zhang, J., Chen, Y., Liu, X., Li, J., Fu, L., You, L., Murray, J. W., Liu, H., Li, H., Li, C., Wu, S., Li, J., Chen, Z., Song, J., Wang, D., & Ji, X. 
+> Qin, Z., Zhao, S., Deng, Z., Si, X., Cheng, X., Zhang, Z., Zhang, Y., Han, X., Zhang, J., Chen, Y., Liu, X., Li, J., Fu, L., You, L., Murray, J. W., Liu, H., Li, H., Li, C., Wu, S., Li, J., Chen, Z., Song, J., Wang, D., & Ji, X. 
 Simplifying in silico protein evolution with minimal screening by unZipro. Manuscript under review.
+
+
+## License
+Distributed under [Apache 2.0](https://github.com/Gabriel-QIN/unZipro/blob/master/LICENSE) license.
