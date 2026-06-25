@@ -6,7 +6,7 @@
 
 ---
 
-![unZipro workflow](image/unZipro.png)
+![unZipro graph](image/graph.png)
 
 
 # Overview
@@ -16,7 +16,7 @@ unZipro (unsupervised Zero-shot inverse folding framework for protein evolution)
 By combining general inverse folding constraints with family-specific adaptation, unZipro efficiently prioritizes high-fitness mutations without exhaustive screening.
 
 
-![unZipro Applications](image/applications.png)
+![unZipro overview](image/unZipro.png)
 
 ## ⚙️ How it works
 unZipro tackles protein engineering like “hunting for the needle in the haystack”:
