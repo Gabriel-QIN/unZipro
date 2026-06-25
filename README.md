@@ -46,7 +46,7 @@ unZipro is a general-purpose framework for in silico protein evolution and can b
 - **Protein interaction engineering** – protein–ligand and protein–nucleic acid interactions.
 - **Agricultural biotechnology** – crop improvement and stress tolerance.
 - **General protein design** – beneficial mutation discovery for diverse proteins.
-
+![unZipro overview](image/applications.png)
 
 # Google Colab  [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Gabriel-QIN/unZipro/blob/master/notebooks/unZipro.ipynb)
 We provide a convenient [Google Colab notebook](https://colab.research.google.com/github/Gabriel-QIN/unZipro/blob/master/notebooks/unZipro.ipynb) to run unZipro on-the-fly without any local installation.
