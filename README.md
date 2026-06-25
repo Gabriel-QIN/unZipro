@@ -38,14 +38,14 @@ unZipro tackles protein engineering like “hunting for the needle in the haysta
 
 unZipro is a general-purpose framework for in silico protein evolution and can be applied to a broad range of protein engineering tasks, including:
 
-- **Enzyme engineering** – improving catalytic activity, stability, substrate specificity, and engineering rate-limiting enzymes for industrial biotechnology.
-- **Genome editing tool optimization** – engineering CRISPR-associated proteins (e.g., SpCas9, Cas12, CasΦ), base editors, prime editors, and other programmable nucleases.
-- **Plant protein engineering** – enhancing disease and virus resistance, optimizing transcription factors, metabolic enzymes, and crop trait-related proteins.
-- **Protein therapeutics** – engineering antibodies, therapeutic enzymes, cytokines, peptide drugs, and other biopharmaceutical proteins.
-- **Synthetic biology** – optimizing biosynthetic pathways, metabolic enzymes, regulatory proteins, biosensors, and synthetic circuits.
-- **Protein–ligand and protein–nucleic acid interaction engineering** – improving binding affinity, specificity, and molecular recognition.
-- **Agricultural biotechnology** – engineering proteins for crop improvement, stress tolerance, herbicide resistance, nutrient utilization, and yield enhancement.
-- **General protein design** – rapid exploration of beneficial mutations for virtually any protein with known or predicted structures.
+- **Enzyme engineering** – activity, stability, specificity, and rate-limiting enzymes.
+- **Genome editing tools** – CRISPR-Cas systems, base editors, and prime editors.
+- **Plant protein engineering** – disease resistance, transcription factors, and metabolic enzymes.
+- **Protein therapeutics** – antibodies, therapeutic enzymes, cytokines, and peptides.
+- **Synthetic biology** – metabolic pathways, biosensors, and regulatory proteins.
+- **Protein interaction engineering** – protein–ligand and protein–nucleic acid interactions.
+- **Agricultural biotechnology** – crop improvement and stress tolerance.
+- **General protein design** – beneficial mutation discovery for diverse proteins.
 
 
 # Google Colab  [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Gabriel-QIN/unZipro/blob/master/notebooks/unZipro.ipynb)
