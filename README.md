@@ -34,13 +34,21 @@ unZipro tackles protein engineering like “hunting for the needle in the haysta
 5. Structure-flexible: supports both experimentally-resoveled structures and AlphaFold-predicted models.
 
 
+```markdown
 ## Applications
 
-- Enzyme engineering 
-- Optimization of genome editing tools (e.g., SpCas9, Cas12, base editor, and prime editor)
-- Plant protein engineering (virus resistance enhancement, transcription factor engineering, etc.)
-- Protein therapeutics
-- General protein design tasks in biotechnology & agriculture
+unZipro is a general-purpose framework for in silico protein evolution and can be applied to a broad range of protein engineering tasks, including:
+
+- **Enzyme engineering** – improving catalytic activity, stability, substrate specificity, and engineering rate-limiting enzymes for industrial biotechnology.
+- **Genome editing tool optimization** – engineering CRISPR-associated proteins (e.g., SpCas9, Cas12, CasΦ), base editors, prime editors, and other programmable nucleases.
+- **Plant protein engineering** – enhancing disease and virus resistance, optimizing transcription factors, metabolic enzymes, and crop trait-related proteins.
+- **Protein therapeutics** – engineering antibodies, therapeutic enzymes, cytokines, peptide drugs, and other biopharmaceutical proteins.
+- **Synthetic biology** – optimizing biosynthetic pathways, metabolic enzymes, regulatory proteins, biosensors, and synthetic circuits.
+- **Protein–ligand and protein–nucleic acid interaction engineering** – improving binding affinity, specificity, and molecular recognition.
+- **Agricultural biotechnology** – engineering proteins for crop improvement, stress tolerance, herbicide resistance, nutrient utilization, and yield enhancement.
+- **General protein design** – rapid exploration of beneficial mutations for virtually any protein with known or predicted structures.
+```
+
 
 # Google Colab  [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Gabriel-QIN/unZipro/blob/master/notebooks/unZipro.ipynb)
 We provide a convenient [Google Colab notebook](https://colab.research.google.com/github/Gabriel-QIN/unZipro/blob/master/notebooks/unZipro.ipynb) to run unZipro on-the-fly without any local installation.
