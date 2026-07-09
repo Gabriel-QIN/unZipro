@@ -13,7 +13,7 @@
 
 unZipro (unsupervised Zero-shot inverse folding framework for protein evolution) is a lightweight graph neural network (GNN)-based framework designed for AI-guided protein engineering.
 
-By combining general inverse folding constraints with family-specific adaptation, unZipro efficiently prioritizes high-fitness mutations without exhaustive screening.
+By combining general inverse folding constraints with family-specific adaptation, unZipro can efficiently prioritizes high-fitness mutations without exhaustive screening.
 
 
 ![unZipro overview](image/unZipro.png)
