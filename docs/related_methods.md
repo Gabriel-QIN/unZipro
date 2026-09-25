@@ -1,6 +1,6 @@
 # Related AI protein and genome methods
 
-This page is a curated landscape of representative methods related to unZipro, updated through **26 September 2026**. It is intentionally selective rather than exhaustive and includes both general protein/genome methods and plant-focused models.
+This page is a curated landscape of representative methods related to unZipro, updated through **25 September 2026**. It is intentionally selective rather than exhaustive and includes both general protein/genome methods and plant-focused models.
 
 Publication status is stated explicitly:
 
