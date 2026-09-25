@@ -8,6 +8,21 @@
 
 ![unZipro](image/graph.jpg)
 
+## Table of contents
+
+- [Overview](#overview)
+- [How it works](#how-it-works)
+- [Key features](#key-features)
+- [Applications](#applications)
+- [Related AI protein and genome methods](#related-ai-protein-and-genome-methods)
+- [Google Colab](#google-colab)
+- [Run unZipro locally](#run-unzipro-on-local-machine)
+- [High-fitness mutation prioritization](#high-fitness-mutation-prioritization)
+- [Pretraining](#pretraining)
+- [Finetuning](#finetuning)
+- [Acknowledgements](#acknowledgements)
+- [Citation](#citation)
+
 # Overview
 
 unZipro (unsupervised Zero-shot inverse folding framework for protein evolution) is a lightweight graph neural network (GNN)-based framework designed for AI-guided protein engineering.
@@ -17,12 +32,16 @@ By combining general inverse folding constraints with family-specific adaptation
 
 ![unZipro](https://cdn.jsdelivr.net/gh/Gabriel-QIN/unZipro@master/image/unZipro.jpg)
 
+<a id="how-it-works"></a>
+
 ## ⚙️ How it works
 unZipro tackles protein engineering like “hunting for the needle in the haystack”:
 
 - 🧠 Zero-shot transfer learning captures a universal protein fitness landscape.
 - 🧩 Meta-learning adapts to family-specific fitness landscapes.
 - Prioritization of the most promising high-fitness variants for experimental validation.
+
+<a id="key-features"></a>
 
 ## 🚀 Key Features of unZipro
 
@@ -46,6 +65,22 @@ unZipro is a general-purpose framework for in silico protein evolution and can b
 - **Agricultural biotechnology** – crop improvement and stress tolerance.
 - **General protein design** – beneficial mutation discovery for diverse proteins.
 ![applications](https://cdn.jsdelivr.net/gh/Gabriel-QIN/unZipro@master/image/applications.jpg)
+
+## Related AI protein and genome methods
+
+unZipro is positioned within a rapidly expanding ecosystem of structure-aware protein design, experimental-feedback optimization, scientific agents, and genome foundation models. Representative methods include:
+
+| Area | Representative methods | Main contribution |
+| --- | --- | --- |
+| Inverse folding and structural design | [ProteinMPNN](https://doi.org/10.1126/science.add2187), [RFdiffusion](https://doi.org/10.1038/s41586-023-06415-8), [BindCraft](https://doi.org/10.1038/s41586-025-09429-6) | Backbone-conditioned sequence design and de novo structure/binder generation |
+| Experimental-feedback alignment | [ProteinDPO](https://doi.org/10.1038/s41592-026-03137-3), [ORI / RLWF](https://doi.org/10.1038/s41467-026-69855-6), [RLXF](https://doi.org/10.1038/s41467-026-77557-2) | Preference optimization and closed-loop learning from wet-lab measurements |
+| Guided generation and model-guided evolution | [ProteinGuide](https://doi.org/10.1038/s41587-026-03207-z), [EVOLVEpro](https://doi.org/10.1038/s41592-025-02636-1) | Property-conditioned generation and low-data iterative optimization |
+| Protein-design agents | [MAProt](https://doi.org/10.1609/aaai.v40i2.37142), [ProtAgents](https://doi.org/10.1039/D4DD00013G) | Multi-agent coordination of language, structure, physics, and optimization tools |
+| Interaction and network biology | [AlphaFold 3](https://doi.org/10.1038/s41586-024-07487-w), [Geneformer](https://doi.org/10.1038/s41586-023-06139-9), [RegFormer](https://doi.org/10.1038/s41467-026-72198-x) | Biomolecular complex prediction, gene-network transfer learning, and GRN-aware cell models |
+| Genome and regulatory models | [Evo 2](https://doi.org/10.1038/s41586-026-10176-5), [AlphaGenome](https://doi.org/10.1038/s41586-025-10014-0), [PEAgent](https://doi.org/10.64898/2026.07.22.740070) | Genome-scale sequence modeling, regulatory variant prediction, and plant cis-regulatory grammar |
+| Plant protein models | [PlantPTM](https://doi.org/10.1016/j.molp.2026.08.002) | Multi-type plant post-translational modification prediction |
+
+Unlike full de novo generation or repeated laboratory reinforcement-learning loops, unZipro focuses on lightweight, structure-aware zero-shot mutation prioritization, family-specific adaptation, and minimal experimental screening. See the curated [related-method landscape](docs/related_methods.md) for a more detailed comparison, publication status, and code links.
 
 # Google Colab  [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Gabriel-QIN/unZipro/blob/master/notebooks/unZipro.ipynb)
 We provide a convenient [Google Colab notebook](https://colab.research.google.com/github/Gabriel-QIN/unZipro/blob/master/notebooks/unZipro.ipynb) to run unZipro on-the-fly without any local installation.
