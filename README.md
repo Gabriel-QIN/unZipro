@@ -6,8 +6,7 @@
 
 ---
 
-![graph](https://cdn.jsdelivr.net/gh/Gabriel-QIN/unZipro@master/image/graph.jpg)
-
+![unZipro](image/graph.jpg)
 
 # Overview
 
@@ -256,7 +255,7 @@ We sincerely thank the authors of these repositories for their pioneering effort
 If you use **unZipro** in your research, please cite:
 
 > Qin, Z., Zhao, S., Deng, Z., Si, X., Cheng, X., Zhang, Z., Zhang, Y., Han, X., Zhang, J., Chen, Y., Liu, X., Li, J., Fu, L., You, L., Murray, J. W., Liu, H., Li, H., Li, C., Wu, S., Li, J., Chen, Z., Song, J., Wang, D., & Ji, X. 
-Simplifying in silico protein evolution with minimal screening by unZipro. Molecular Cell. https://doi.org/10.1016/j.molcel.2026.08.028
+Simplifying in silico protein evolution with minimal screening by unZipro. Molecular Cell. 2026. https://doi.org/10.1016/j.molcel.2026.08.028
 
 
 ## License
