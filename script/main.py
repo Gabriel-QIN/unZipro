@@ -53,7 +53,7 @@ def main():
     parser.add_argument('--use_wget', action='store_true', help="Use wget instead of aria2c for data download")
     parser.add_argument('--wait_time', type=int, default=120, help="Seconds to wait between submissions")
     parser.add_argument('--train_size', type=float, default=100, help="Train size for meta-transfer learning")
-    parser.add_argument('--cpu', '-cpu', type=int, default=8, metavar='[Int]', help='CPU processors for data loading.(default:8).')
+    parser.add_argument('--cpu', '-cpu', type=int, default=8, metavar='[Int]', help='Data workers; 0 runs downloading and data loading in the current process.')
     parser.add_argument('--gpu', '-gpu', type=int, default=0, metavar='[Int]', help='GPU id.(default:0).')
     parser.add_argument('--cpu_only', action='store_true', help='Use CPU for fine-tuning instead of GPU.')
     parser.add_argument('--config_path', type=str, default='config/unZipro_pretrain.json', help='Model config.')
@@ -75,6 +75,8 @@ def main():
     parser.add_argument('--res', '-res', type=str, default=None, help='Define residues to output prob, separated by `,` (e.g., 83,123)')
 
     args = parser.parse_args()
+    if args.cpu < 0:
+        parser.error('--cpu must be non-negative; use 0 for single-process execution.')
 
     # parse input PDB
     pdb_list = parse_pdb_input(args.pdb)
@@ -118,11 +120,14 @@ def main():
             pdb_dir = os.path.join(args.work_dir, 'pdb')
             os.makedirs(pdb_dir, exist_ok=True)
             print(f"INFO | Found {len(train)} meta-training structures and {len(test)} meta-testing structures!")
-            with ThreadPoolExecutor(max_workers=args.cpu) as executor:
-                # futures = [executor.submit(fetch_and_save, pdb, pdb_dir) for pdb in download_pdblist]
-                futures = [executor.submit(safe_fetch, pdb, pdb_dir) for pdb in download_pdblist]
-                for f in futures:
-                    f.result()
+            if args.cpu == 0:
+                for pdb in download_pdblist:
+                    safe_fetch(pdb, pdb_dir)
+            else:
+                with ThreadPoolExecutor(max_workers=args.cpu) as executor:
+                    futures = [executor.submit(safe_fetch, pdb, pdb_dir) for pdb in download_pdblist]
+                    for f in futures:
+                        f.result()
 
             # Step 4: Finetuning
             print(f"INFO | Step 4: start unZipro finetuning!")
@@ -157,7 +162,7 @@ def main():
             model.load_state_dict(new_state_dict)
         # dataloader setup
         dataset = GraphDataset(datalist=[osp.join(args.pdb_dir, f'{pdb_name}.pdb')], nneighbor=args.nneighbor, noise=0, cache_dir=cache_dir)
-        loader = get_loader(dataset=dataset, batchsize=1)
+        loader = get_loader(dataset=dataset, batchsize=1, num_workers=args.cpu)
         criterion = nn.CrossEntropyLoss().to(device)
         model.eval()
         df_list= infer_single_protein(model, criterion, loader, args.pdb_dir, args.outdir, temperature=1.0, device=device, output_prob=args.probs, output_logits=args.logits, rank_by_prob=args.rank_by_prob, res=args.res)

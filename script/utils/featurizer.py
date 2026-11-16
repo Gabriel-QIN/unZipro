@@ -621,6 +621,12 @@ def _process_pdb(pdb_path, nneighbor):
         node, edgemat, adjmat, label, mask, aa1 = get_graph_features(
             coords, exists, resnames, atom2id=atom2id, nneighbor=nneighbor
         )
+        # A long structure can still have no usable labels (e.g. CA-only PDBs).
+        # Reject it before it can enter either support or query datasets.
+        if not mask.any().item():
+            raise ValueError(
+                "no valid target residues; check backbone atoms, chain breaks, and residue names"
+            )
         node, edgemat, adjmat = map(replace_nan, [node, edgemat, adjmat])
         naa = coords.shape[0]
         if naa > nneighbor + 1:
@@ -632,6 +638,12 @@ def _process_pdb(pdb_path, nneighbor):
         return None
 
 def check_pdb(datalist, nneighbor=20, num_workers=8):
+    """Check structures without creating a process pool when num_workers is zero."""
+    if num_workers < 0:
+        raise ValueError("num_workers must be non-negative; use 0 for single-process checking.")
+    if num_workers == 0:
+        return [result for pdb_path in datalist
+                if (result := _process_pdb(pdb_path, nneighbor)) is not None]
     checklist = []
     with ProcessPoolExecutor(max_workers=num_workers) as executor:
         futures = {executor.submit(_process_pdb, pdb_path, nneighbor): pdb_path for pdb_path in datalist}

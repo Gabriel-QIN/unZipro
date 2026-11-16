@@ -5,6 +5,9 @@ from torch.utils.data import Dataset, DataLoader
 from .featurizer import protein_to_features
 
 def get_loader(dataset, batchsize, num_workers = min(8, os.cpu_count()), shuffle=False):
+    """Load graphs in the caller process when num_workers is zero."""
+    if num_workers < 0:
+        raise ValueError("num_workers must be non-negative; use 0 for single-process loading.")
     collator = GraphCollator(batchsize)
     batch_loader = DataLoader(
         dataset,
@@ -13,7 +16,7 @@ def get_loader(dataset, batchsize, num_workers = min(8, os.cpu_count()), shuffle
         num_workers=num_workers,
         pin_memory=False,
         persistent_workers=False,
-        prefetch_factor=2,
+        prefetch_factor=2 if num_workers > 0 else None,
         collate_fn=collator
     )
     return batch_loader

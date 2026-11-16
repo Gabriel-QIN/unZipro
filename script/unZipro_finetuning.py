@@ -242,7 +242,7 @@ if __name__ == '__main__':
     parser.add_argument('--batchsize', '-bs', type=int, default=5, metavar='[Int]',
                         help='Batch size.')
     parser.add_argument('--cpu', '-cpu', type=int, default=8, metavar='[Int]',
-                        help='CPU processors for data loading.(default:8).')
+                        help='Data-loading workers; 0 runs in the current process.')
     parser.add_argument('--gpu', '-gpu', type=int, default=0, metavar='[Int]',
                         help='GPU id.(default:0).')
     parser.add_argument('--cpu_only', action='store_true',

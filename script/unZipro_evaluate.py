@@ -216,7 +216,7 @@ if __name__=='__main__':
     parser.add_argument('--param', type=str, default="Models/unZipro_params.pt",
                         help='Parameter file.')
     parser.add_argument('--cpu', '-cpu', type=int, default=16, metavar='int',
-                             help='CPU cores for data loading.')
+                             help='Data-loading workers; 0 runs in the current process.')
     parser.add_argument('--gpu', '-gpu', type=int, default=0, metavar='[Int]',
                         help='GPU id.(default:0).')
     parser.add_argument('--noise', '-ni', type=float, default=0, metavar='float',
@@ -230,6 +230,8 @@ if __name__=='__main__':
 
     ##  arguments  ##
     args = parser.parse_args()
+    if args.cpu < 0:
+        parser.error('--cpu must be non-negative; use 0 for single-process loading.')
     config_path = osp.join(args.config_path)
     model_config = ModelConfig(**json.load(open(config_path)))
     model_config = update_config_from_args(model_config, args)
@@ -260,7 +262,7 @@ if __name__=='__main__':
 
     test_dataset = GraphDataset(datalist=datalist, nneighbor=args.nneighbor, noise=0, cache_dir=args.cache_dir)
     print(f'Loading datasets for testing: {len(test_dataset)}')
-    num_workers = args.cpu if args.cpu > 0 else min(8, os.cpu_count())
+    num_workers = args.cpu
     test_loader = get_loader(test_dataset, 1, num_workers=num_workers, shuffle=False)
 
     # loss function

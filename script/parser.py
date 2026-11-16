@@ -48,7 +48,7 @@ def parse_args():
     train_group.add_argument('--batchsize', '-bs', type=int, default=10, metavar='int',
                              help='Batch size for training.')
     train_group.add_argument('--cpu', '-cpu', type=int, default=16, metavar='int',
-                             help='CPU cores for data loading.')
+                             help='Data-loading workers; 0 runs in the current process.')
     train_group.add_argument('--gpu', '-gpu', type=int, default=0, metavar='int',
                              help='GPU id.')
     train_group.add_argument('--learning-rate', '-lr', type=float, default=0.002, metavar='float',

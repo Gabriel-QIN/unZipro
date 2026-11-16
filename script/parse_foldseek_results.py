@@ -3,13 +3,20 @@ import pandas as pd
 
 # https://alphafold.ebi.ac.uk/files/AF-A0A2Y9F5D4-F1-model_v4.pdb
 
+def _split_afdb_hits(hits, fill_train_number, fill_test_number):
+    """Take validation hits first, keeping training hits disjoint."""
+    test = hits.head(fill_test_number)[['PDB_ID']]
+    train = hits.iloc[fill_test_number:].tail(fill_train_number)[['PDB_ID']]
+    return train, test
+
+
 def parse_mmseqs(m8_path, savepath, train_path, test_path, train_size=0.5, max_train_size=100, test_ratio=0.2, include_af2=True):
     m8_columns = "query,target,pident,alnlen,mismatch,gapopen,qstart,qend,tstart,tend,prob,evalue,bits,qlen,tlen,qaln,taln,tca,tseq,taxid,taxname".split(',')
     saved_cols = ['PDB_ID']
-    All_PDB_list = []
-    df = pd.read_csv(m8_path,sep='\t')
-    df.columns = m8_columns
-    df['PDB_ID'] = [a[:4]+a[22:].split(' ')[0].split('-')[0] for a in df['target'].tolist()]
+    df = pd.read_csv(m8_path, sep='\t', header=None, names=m8_columns)
+    df['PDB_ID'] = pd.Series(
+        [a[:4]+a[22:].split(' ')[0].split('-')[0] for a in df['target'].tolist()],
+        index=df.index, dtype='string')
     num_pdbs_before = len(df)
     num_pdbs = len(df)
     if train_size <= 1:
@@ -20,74 +27,57 @@ def parse_mmseqs(m8_path, savepath, train_path, test_path, train_size=0.5, max_t
             train_size_pdb = train_size_pdb
     else:
         train_size_pdb = int(train_size)
-    sorted_df = df.sort_values(by='prob', ascending=False)
+    sorted_df = df.sort_values(by='prob', ascending=False).drop_duplicates('PDB_ID')
     final_df = sorted_df.copy()
 
     num_test_pdb = int(train_size_pdb * test_ratio)
     num_train_pdb = int(train_size_pdb)
     
     test_df = final_df.head(int(num_test_pdb))[saved_cols]
-    remaining_df = final_df.iloc[:-num_test_pdb]
+    # Chains from the same PDB entry must stay on one side of the split.
+    test_groups = set(test_df['PDB_ID'].str[:4].str.lower())
+    remaining_df = final_df[~final_df['PDB_ID'].str[:4].str.lower().isin(test_groups)]
     train_df = remaining_df.tail(num_train_pdb)[saved_cols].copy()
     overlap = set(train_df['PDB_ID']).intersection(set(test_df['PDB_ID']))
     if overlap:
         print(f"Warning: Train/Test overlap detected, removing {len(overlap)} PDB(s) from train set!")
         train_df = train_df[~train_df['PDB_ID'].isin(overlap)]
     assert len(set(train_df['PDB_ID']).intersection(set(test_df['PDB_ID']))) == 0, f"Train/Test overlap detected: {overlap}"
-    All_PDB_list.extend(train_df['PDB_ID'].tolist())
-    All_PDB_list.extend(test_df['PDB_ID'].tolist())
-
+    fill_train_number = 0
+    fill_test_number = 0
     if len(train_df) < max_train_size:
-        include_af2_train = True
-        fill_train_numer = int(max_train_size - len(train_df))
-    else:
-        include_af2_train = False
-    if len(test_df) < max_train_size * test_ratio:
-        include_af2_test = True
-        fill_test_number = int(max_train_size * test_ratio - len(test_df))
-    else:
-        include_af2_test = False
+        fill_train_number = int(max_train_size - len(train_df))
+    target_test_size = int(max_train_size * test_ratio)
+    if len(test_df) < target_test_size:
+        fill_test_number = target_test_size - len(test_df)
     num_pdbs = len(final_df)
 
-    pdb_ids_af = []
     num_af_pdbs = 0
-    num_af_pdbs_before = 0
-    if include_af2_test or include_af2_train:
+    train_af = pd.DataFrame({'PDB_ID': pd.Series(dtype='string')})
+    test_af = train_af.copy()
+    if include_af2 and (fill_train_number or fill_test_number):
+        af_m8_path = m8_path.replace('pdb100', 'afdb50')
         try:
-            af_m8_path = m8_path.replace('pdb100', 'afdb50')
-            df_af = pd.read_csv(af_m8_path,sep='\t')
-            df_af.columns = m8_columns
-            sorted_df_af = df_af.sort_values(by='prob', ascending=False)
-            num_af_pdbs_before = len(sorted_df_af)
-            sorted_df_af = sorted_df_af.copy()
-            num_af_pdbs = len(sorted_df_af)
-            sorted_df_af['PDB_ID'] = [a.split(' ')[0].replace('AF-', '').replace('-F1-model_v4', '') for a in df_af['target'].tolist()]
-
-            final_df_af = sorted_df_af.copy()
-            if include_af2_test:
-                test_af = final_df_af.head(int(fill_test_number))[saved_cols]
-                remaining_af = final_df_af.iloc[:-fill_test_number]
-                train_af = remaining_af.tail(fill_train_numer)[saved_cols].copy()
-                All_PDB_list.extend(train_af['PDB_ID'].tolist())
-                All_PDB_list.extend(test_af['PDB_ID'].tolist())
-            else:
-                train_af = final_df_af.tail(fill_train_numer)[saved_cols].copy()
-                All_PDB_list.extend(train_af['PDB_ID'].tolist())
-            num_af_pdbs = len(final_df_af)
-        except Exception as e:
+            df_af = pd.read_csv(af_m8_path, sep='\t', header=None, names=m8_columns)
+        except (OSError, pd.errors.EmptyDataError, pd.errors.ParserError) as e:
             print(f"Error in parsing AFDB m8 file {af_m8_path}: {e}")
-            include_af2_train = False
-            include_af2_test = False
-            pass
-            
-    if include_af2_train:
-        all_train_df = pd.concat([train_df, train_af], ignore_index=True)
-    else:
-        all_train_df = pd.concat([train_df], ignore_index=True)
-    if include_af2_test:
-        all_test_df = pd.concat([test_df, test_af], ignore_index=True)
-    else:
-        all_test_df = pd.concat([test_df], ignore_index=True)
+        else:
+            # Derive IDs before sorting so they remain paired with their scores.
+            df_af['PDB_ID'] = pd.Series(
+                [a.split(' ')[0].replace('AF-', '').replace('-F1-model_v4', '') for a in df_af['target'].tolist()],
+                index=df_af.index, dtype='string')
+            final_df_af = df_af.sort_values(by='prob', ascending=False).drop_duplicates('PDB_ID')
+            num_af_pdbs = len(final_df_af)
+            selected_ids = set(train_df['PDB_ID']) | set(test_df['PDB_ID'])
+            final_df_af = final_df_af[~final_df_af['PDB_ID'].isin(selected_ids)]
+            train_af, test_af = _split_afdb_hits(final_df_af, fill_train_number, fill_test_number)
+
+    all_train_df = pd.concat([train_df, train_af], ignore_index=True)
+    all_test_df = pd.concat([test_df, test_af], ignore_index=True)
+    overlap = set(all_train_df['PDB_ID']) & set(all_test_df['PDB_ID'])
+    if overlap:
+        raise ValueError(f"Train/Test overlap detected: {sorted(overlap)}")
+    All_PDB_list = all_train_df['PDB_ID'].tolist() + all_test_df['PDB_ID'].tolist()
     
     all_train_df.to_csv(train_path,sep='\t',index=False,header=False)
     all_test_df.to_csv(test_path,sep='\t',index=False,header=False)

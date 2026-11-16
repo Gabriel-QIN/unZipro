@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-import traceback
 from torch.autograd import grad
 import copy
 import torch
@@ -95,11 +94,11 @@ def clone_module(module, memo=None):
                     clone._parameters[param_key] = cloned
                     memo[param_ptr] = cloned
 
-    # Third, handle the buffers if necessary
+    # Clone all buffers so task-local state (e.g. BatchNorm statistics) does
+    # not mutate the original module or other learners.
     if hasattr(clone, '_buffers'):
         for buffer_key in module._buffers:
-            if clone._buffers[buffer_key] is not None and \
-                    clone._buffers[buffer_key].requires_grad:
+            if clone._buffers[buffer_key] is not None:
                 buff = module._buffers[buffer_key]
                 buff_ptr = buff.data_ptr
                 if buff_ptr in memo:
@@ -355,15 +354,11 @@ class MAML(BaseLearner):
                     gradient = None
                 gradients.append(gradient)
         else:
-            try:
-                gradients = grad(loss,
-                                 self.module.parameters(),
-                                 retain_graph=second_order,
-                                 create_graph=second_order,
-                                 allow_unused=allow_unused)
-            except RuntimeError:
-                traceback.print_exc()
-                print('learn2learn: Maybe try with allow_nograd=True and/or allow_unused=True ?')
+            gradients = grad(loss,
+                             self.module.parameters(),
+                             retain_graph=second_order,
+                             create_graph=second_order,
+                             allow_unused=allow_unused)
 
         # Update the module
         self.module = maml_update(self.module, self.lr, gradients)

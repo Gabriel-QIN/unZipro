@@ -15,6 +15,8 @@ from parser import parse_args
 from model import unZipro, weights_init
 
 def main(args):
+    if args.cpu < 0:
+        raise ValueError("cpu must be non-negative; use 0 for single-process loading.")
     PROJECT_NAME = args.project_name
     model_config = ModelConfig()
     model_config = update_config_from_args(model_config, args)
@@ -69,7 +71,7 @@ def main(args):
     train_dataset = GraphDataset(datalist=trainlist, nneighbor=args.nneighbor, noise=args.noise, cache_dir=args.cachedir)
     valid_dataset = GraphDataset(datalist=validlist, nneighbor=args.nneighbor, noise=args.noise, cache_dir=args.cachedir)
     print(f'Loading datasets for training: Train {len(train_dataset)}; Valid {len(valid_dataset)}')
-    num_workers = args.cpu if args.cpu > 0 else min(8, os.cpu_count())
+    num_workers = args.cpu
     train_loader = get_loader(train_dataset, args.batchsize, num_workers=num_workers, shuffle=True)
     valid_loader = get_loader(valid_dataset, args.batchsize, num_workers=num_workers, shuffle=False)
 
