@@ -38,8 +38,6 @@ unZipro tackles protein engineering like “hunting for the needle in the haysta
 - 🧩 Meta-learning adapts to family-specific fitness landscapes.
 - Prioritization of the most promising high-fitness variants for experimental validation.
 
-`<a id="key-features"></a>`
-
 ## 🚀 Key Features of unZipro
 
 1. Zero-shot transfer – predict functional variants without extensive few-shot training or large experimental datasets.
