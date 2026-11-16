@@ -283,7 +283,7 @@ Run unZipro fine-tuning easily with the following command.
 # Or you can use the Foldseek-retrieved structures as your fine-tuninng datasets.
 # Please ensure your PDB files are in `pdbdir`
 name=ABE
-python script/unZipro_finetuning.py --train data/finetuned_dataset/${name}//train.csv --vali data/finetuned_dataset/${name}//test.csv --pdbdir data/finetuned_dataset/PDB --cache_dir data/finetuned_dataset/tmp --model Models/finetuned/ABE  --project_name unZipro_ABE --epochs 20 --gpu 0 --first_order --batchsize 1
+python script/unZipro_finetuning.py --train data/finetuned_dataset/${name}/train.csv --vali data/finetuned_dataset/${name}/test.csv --pdbdir data/finetuned_dataset/PDB --cache_dir data/finetuned_dataset/tmp --model Models/finetuned/ABE  --project_name unZipro_ABE --epochs 20 --gpu 0 --first_order --batchsize 1
 ```
 
 Or you can simply run this bash script (every step will be excuted here):
