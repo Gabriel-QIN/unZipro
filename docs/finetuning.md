@@ -88,12 +88,69 @@ python script/fetch_PDB_parallel.py -i data/finetuned_dataset/PDB_IDs.txt -o dat
 >- Some of the PDB structures are solution NMR structures and generally have low resolution. Users should be aware of potential limitations when using these structures for modeling or analysis.
 >- If your query structure has no matches in the provided databases, we strongly recommend creating your own dataset, *e.g.*, by retrieving homologs based on sequence similarity.
 ## 3. unZipro finetuning strategy
+### ABE example
+
+`runs/finetune_ABE.sh` combines ABE's 100 training and 20 validation IDs,
+downloads their single-chain structures with `fetch_PDB_parallel.py`, and runs
+FOMAML fine-tuning to reduce GPU memory usage. Existing structures are reused.
+Downloads inherit the current `http_proxy` / `https_proxy` environment variables.
+
+```sh
+conda activate unZipro
+# Download only; save per-item results in ABE/download_report.json.
+bash runs/finetune_ABE.sh --download-only
+# Download missing files, then run FOMAML fine-tuning for 20 epochs.
+bash runs/finetune_ABE.sh
+# Reduce query batch size further if needed.
+bash runs/finetune_ABE.sh --batchsize 1
+```
+
+Structures are saved in `data/finetuned_dataset/PDB/`; the trained initialization
+is saved as `Models/finetuned/ABE/unZipro_ABE.pt`. Biotite 0.40 requires NumPy
+below 2; the repository pins NumPy 1.26.4. `PYTHON` can select another Python
+interpreter, and `FETCH_WORKERS`, `CPU`, and `GPU` configure worker counts and
+the GPU index.
+
 ### 3.1 Finetuning on a single protein
 ```sh
 # Set protein name
 name=P53_HUMAN
-python script/unZipro_finetuning.py --train data/finetuned_dataset/${name}/train.csv --valid data --config_path config/unZipro_pretrain.json finetuned_dataset/${name}/test.csv --project_name unZipro_${name} --model Models/finetuned/${name} --pdbdir data/finetuned_dataset/PDB/ --cache_dir data/finetuned_dataset/tmp/ --epoch 20 
+python script/unZipro_finetuning.py \
+    --train "data/finetuned_dataset/${name}/train.csv" \
+    --valid "data/finetuned_dataset/${name}/test.csv" \
+    --config_path config/unZipro_pretrain.json \
+    --project_name "unZipro_${name}" \
+    --model "Models/finetuned/${name}" \
+    --pdbdir data/finetuned_dataset/PDB/ \
+    --cache_dir data/finetuned_dataset/tmp/ \
+    --epochs 20
 ```
+
+Each input list must contain at least two usable structures after missing or
+invalid PDB files have been filtered out. The script reports the listed, found,
+and usable counts before training. Check `--pdbdir` and download the structures
+in step 2 if too few remain. Lists contain one PDB ID per line, without a header;
+the `.pdb` extension is optional.
+
+Prechecking skips structures with no valid target residues, including CA-only
+PDBs without the required N/CA/C backbone. Each rejection includes the file path
+and reason; these structures are excluded before the support/query split.
+
+Each epoch forms one training task by splitting the training structures into
+disjoint support and query sets. A fresh learner is cloned once from the learned
+initialization and adapted on the support set for `--adapt_step` consecutive SGD
+steps at `--adapt_lr`. The mean query loss over valid residues then produces one
+Adam update of the initialization at `--meta_lr`. Query batches share the same
+adapted learner. Full second-order MAML is the default; add `--first_order` to use
+the FOMAML approximation and reduce memory use.
+
+Validation uses a fixed support/query split and no feature noise. It adapts a
+fresh clone on validation support structures and evaluates the validation query
+structures in evaluation mode, leaving the learned initialization, BatchNorm
+buffers, and optimizer unchanged. The saved model contains the initialization
+from the epoch with the lowest validation loss. Set `--cpu 0` for loading and PDB
+checking without worker processes. Both `--epochs` and `--epoch` are accepted.
+
 ### 3.2 Batch Submission for finetuning multiple proteins
 ```sh
 protein_list="data/example/example.txt"
@@ -113,4 +170,4 @@ while read -r name; do
 done < "$protein_list"
 ```
 >Note:
-> - Fine-tuning typically takes 3-5 minutes on GPU / 5-10 minutes on CPU for a 300-aa-length protein.
+> - Runtime depends on structure lengths, `--adapt_step`, `--batchsize`, and whether full MAML or FOMAML is used.
