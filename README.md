@@ -28,6 +28,8 @@ By combining general inverse folding constraints with family-specific adaptation
 
 ![unZipro](https://cdn.jsdelivr.net/gh/Gabriel-QIN/unZipro@master/image/unZipro.jpg)
 
+<a id="how-it-works"></a>
+
 ## ⚙️ How it works
 
 unZipro tackles protein engineering like “hunting for the needle in the haystack”:
@@ -35,6 +37,8 @@ unZipro tackles protein engineering like “hunting for the needle in the haysta
 - 🧠 Zero-shot transfer learning captures a universal protein fitness landscape.
 - 🧩 Meta-learning adapts to family-specific fitness landscapes.
 - Prioritization of the most promising high-fitness variants for experimental validation.
+
+<a id="key-features"></a>
 
 ## 🚀 Key Features of unZipro
 
@@ -57,6 +61,8 @@ unZipro is a general-purpose framework for in silico protein evolution and can b
 - **Agricultural biotechnology** – crop improvement and stress tolerance.
 - **General protein design** – beneficial mutation discovery for diverse proteins.
   ![applications](https://cdn.jsdelivr.net/gh/Gabriel-QIN/unZipro@master/image/applications.jpg)
+
+<a id="google-colab"></a>
 
 # Google Colab  [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Gabriel-QIN/unZipro/blob/master/notebooks/unZipro.ipynb)
 
