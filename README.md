@@ -28,8 +28,6 @@ By combining general inverse folding constraints with family-specific adaptation
 
 ![unZipro](https://cdn.jsdelivr.net/gh/Gabriel-QIN/unZipro@master/image/unZipro.jpg)
 
-`<a id="how-it-works"></a>`
-
 ## ⚙️ How it works
 
 unZipro tackles protein engineering like “hunting for the needle in the haystack”:
@@ -286,6 +284,12 @@ Run unZipro fine-tuning easily with the following command.
 # Please ensure your PDB files are in `pdbdir`
 name=ABE
 python script/unZipro_finetuning.py --train data/finetuned_dataset/${name}//train.csv --vali data/finetuned_dataset/${name}//test.csv --pdbdir data/finetuned_dataset/PDB --cache_dir data/finetuned_dataset/tmp --model Models/finetuned/ABE  --project_name unZipro_ABE --epochs 20 --gpu 0 --first_order --batchsize 1
+```
+
+Or you can simply run this bash script (every step will be excuted here):
+
+```bash
+bash run/finetune_ABE.sh
 ```
 
 For more details, see [Finetuning](docs/finetuning.md).
